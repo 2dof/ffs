@@ -4,8 +4,8 @@
 # mfs.py
 # -----------------Copyrights and license ------------------------------------------------------
 # This file is part of ffs (fuzzy functional system)
-# Copyright (C) @2018@ Lukasz Szydlowski
-# mailto:lukas.sz@wp.pl
+# Copyright (C) @2018@ Szydlowski Lukasz
+# mailto:szydlowski.lu@gmial.com
 #
 #This program is free software: you can redistribute it and/or modify it under the terms of the
 # GNU General Public License as published by the Free Software Foundation, version 3 or any later version.
@@ -15,8 +15,14 @@
 #You should have received a copy of the GNU General Public License along with this program.
 # If not, see http://www.gnu.org/licenses/
 # ----------------------------------------------------------------------------------------------
-
+__author__ = "Szydlowski Lukasz"
+__copyright__ = "Copyright 2018, szydlowski lukasz"
+__license__ = "GPL"
+__email__ = "szydlowski.lu@gmial.com"
+__status__ = "Development"
+__version__ = "1.0.0.dev1"
 import numpy as np
+
 
 mftypes=['trimf','trapmf','gaussmf','gauss2mf','gbellmf','sigmf','singleton']
 
@@ -182,6 +188,5 @@ def eval_mf(xn,params):
         y = singletonmf(xn, params[1:])
     else:
         y=0
-        
-    
+
     return y

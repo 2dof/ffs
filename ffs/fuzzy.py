@@ -4,8 +4,8 @@
 # -----------------Copyrights and license ------------------------------------------------------
 
 # This file is part of ffs (fuzzy functional system)
-# Copyright (C) @2018@ Lukasz Szydlowski
-# mailto:lukas.sz@wp.pl
+# Copyright (C) @2018@ Szydlowski Lukasz
+# mailto:szydlowski.lu@gmial.com
 #
 #This program is free software: you can redistribute it and/or modify it under the terms of the
 # GNU General Public License as published by the Free Software Foundation, version 3 or any later version.
@@ -15,24 +15,32 @@
 #You should have received a copy of the GNU General Public License along with this program.
 # If not, see http://www.gnu.org/licenses/
 # ----------------------------------------------------------------------------------------------
-#import math
-#import fractions
+__author__ = "Szydlowski Lukasz"
+__copyright__ = "Copyright 2018, szydlowski lukasz"
+__license__ = "GPL"
+__email__ = "szydlowski.lu@gmial.com"
+__status__ = "Development"
+__version__ = "1.0.0.dev1"
+
+
 import numpy as np
 from mfs import mftypes
 
-__version__ = "1.0.0"
+__version__ = "1.0.0.dev1"
 
 class fism:
-    """ Fuzzy data structure. fism store konfiguration and settings of fuzzy system.
+    """
+     Fuzzy data structure. fism store konfiguration and settings of fuzzy system.
     """
     
     # Constructor
     def __init__(self, type ='mamdani', Ninputs =0 ,Noutputs = 0):
-        """Initialize fuzzy data structure for fuzzy system.
+        """
+        Initialize fuzzy data structure for fuzzy system
 
-        :param type:
-        :param Ninputs:
-        :param Noutputs:
+        :param type:    type of fuzzy inference system : mamdani or tsk
+        :param Ninputs: No of inputs
+        :param Noutputs: No of outputs
         """
         self.type = type                    # type = mamdani , sugeno
         self.Ninputs    = Ninputs              # (int)
@@ -72,18 +80,17 @@ class fism:
         #insert(a, len(a), np.zeros((1, 4)), axis=0)
 
     def addvar(self,type,name,range):
-        """Add wariable ( input or output) to the fuzzy system
+        """
+        Add wariable ( input or output) to the fuzzy system
+
         :param type: 'in' or 'out'
         :type type: string
-        :param name:
+        :param name: name od variable
         :type name: string
-        :param range:
+        :param range: [min,max] ragne value of variable
         :type tange: [double,double]
         :returns: None
-        
-        
-        .. warning:: text
-        .. note:: blabla
+
         """
         if (type=='in'):
             self.varName.insert(self.Ninputs,name)
@@ -103,12 +110,14 @@ class fism:
 
 
     def delvar(self, var_type, idx):
-        """Delete variable from fis system
-        :param var_type:    "in" or "out" type variable
-        :param idx:     No of variable     
-        :type var_type:     string
-        :type idx:      Int
+        """
+        Delete variable from fis system
 
+        :param var_type:"in" or "out" type variable
+        :param idx: No of variable
+        :type var_type: string
+        :type idx: Int
+        :returns: None
         """
 
         if (var_type == 'in'):
@@ -131,7 +140,9 @@ class fism:
 
 
     def addmf(self,var_type,var_index,namemf,typemf,parammf ):
-        """Add membership function to fuzzy structute
+        """
+        Add membership function to fuzzy structute
+
         :param var_type:      input("in") or output("out")
         :param var_index: Number od added mf
         :param namemf:    name of membership function
@@ -194,8 +205,10 @@ class fism:
 
 
     def delmf(self, var_type,var_index,mf_index):
-        """ Delete membership function from fuzzy system
-        :param type:
+        """
+        Delete membership function from fuzzy system
+
+        :param var_type:
         :param var_index:
         :param mf_index):
         :type type:      string
@@ -223,8 +236,7 @@ class fism:
                self.mfnames_int=np.delete(self.mfnames_in,idx, axis=0)
                self.Nin_mf[var_index-1]-=1
             
-        elif var_type =="out":                               #  TODO add names and add in_mfcsum to fis structure
-
+        elif var_type =="out":
 
             out_mfcsum= [0] * (self.Noutputs+1)
             
@@ -245,7 +257,9 @@ class fism:
         
 
     def setmf(self, var_type,var_index,mf_index,typemf,parammf):
-        """Set new parameters for members ship function for input/output
+        """
+        Set new parameters for members ship function for input/output
+
         :param var_type:  variable type: 'in' or 'out'
         :param var_index: index of variable
         :param mf_idx:    No of mf function
@@ -282,7 +296,9 @@ class fism:
         print('edit mf ')
 
     def getmf(self, var_type,var_index):
-        """ Return list of mf function of varianle
+        """
+        Return list of mf function of varianle
+
         :param var_type:  variable type: 'in' or 'out'
         :param var_index: index of variable
         :type var_type:   string
@@ -293,10 +309,11 @@ class fism:
 
     def addrule(self, rule,weight):
         """ Add rule to fuzzy structure.
-        :param rule:  rule list
+
+        :param rule:   rule list
         :param weight: double
-        :type rule     list od Int
-        :type weight   double
+        :type rule:     list od Int
+        :type weight:   double
         :return: None
         """
         rule=np.array(rule).astype(int)
@@ -312,10 +329,10 @@ class fism:
            self.RuleWeights=np.hstack((self.RuleWeights,np.array(weight)))
            self.NRules+=1
 
-
-
     def delrule(self, ruleNo):
-        """Delete rule from fuzzy structure
+        """
+        Delete rule from fuzzy structure
+
         :param ruleNo: No of rule
         :type ruleNo: Int
         :return:
