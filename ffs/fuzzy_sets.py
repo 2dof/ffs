@@ -3,8 +3,8 @@
 # fuzzy_sets.py
 # -----------------------------------------------------------------------
 # This file is part of ffs (fuzzy functional system)
-# Copyright (C) @2018@ Lukasz Szydlowski
-# mailto:lukas.sz@wp.pl
+# Copyright (C) @2018@ Szydlowski Lukasz
+# mailto:szydlowski.lu@gmial.com
 #
 #This program is free software: you can redistribute it and/or modify it under the terms of the
 # GNU General Public License as published by the Free Software Foundation, version 3 or any later version.
@@ -14,59 +14,66 @@
 #You should have received a copy of the GNU General Public License along with this program.
 # If not, see http://www.gnu.org/licenses/
 # ----------------------------------------------------------------------------------------------
-import math
-import fractions
-import numpy as np
+__author__ = "Szydlowski Lukasz"
+__copyright__ = "Copyright 2018, szydlowski lukasz"
+__license__ = "GPL"
+__email__ = "szydlowski.lu@gmial.com"
+__status__ = "Development"
+__version__ = "1.0.0.dev1"
+
+
 from mfs import *
 
-__version__ = "1.0.0"
 
-# params
 
-def tnorm(x,y,type):
-    """ Return "type" tnorm of input x and y.
-        types of tnorm: "min"  : Minimum sum t-norm
-                        "prod" : Algebic product t-norm
-                        "eprod": Einstein product tnorm
+def tnorm(x,y,norm_type):
+    """
+    Return "type" tnorm of input x and y.
+    Types of tnorm: "min"  : Minimum sum t-norm
+    "prod" : Algebic product t-norm
+    "eprod": Einstein product tnorm
+
     :param x:   value 1
     :param y:   value 2
-    :param type: "min", "prod", eprod
+    :param norm_type: "min", "prod", eprod
     :return: "type" tnorm of (x,y)
     """
     z=0
     # ====== T-NORM =============
-    if type=="min":          # MINIMUM-SUM T-NORM
+    if norm_type=="min":          # MINIMUM-SUM T-NORM
         z=min(x,y)
          
-    elif (type=="prod"):     #ALGEBRAIC-PRODUCT T-NORM
+    elif (norm_type=="prod"):     #ALGEBRAIC-PRODUCT T-NORM
         z=x*y
 
-    elif (type=="eprod"):    #EINSTEIN - PRODUCT T - NORM
+    elif (norm_type=="eprod"):    #EINSTEIN - PRODUCT T - NORM
         a=y*x
         z=2-(y+x-a)
         z= a/z
 
     return z
 
-def snorm(x,y,type):
-    """ compute "type" s-norm for input data x,y.
+def snorm(x,y,norm_type):
+    """
+    Compute "type" s-norm for input data x,y.
     the s-norm types: "max" - maximum: MAX(x,y)
                       "prod" - algebric sum: x + y - xy
                       "prod" - einstein sum: (x + y)/ (1 + xy)
+
     :param x:   input data 1
     :param y:   input data 2
-    :param type: "max", "prod" or "eprod" type snorm
-    :return: 
+    :param norm_type: "max", "prod" or "eprod" type snorm
+    :return: S-Norm of x,y
     """
     z=1
 # ====== s-NORM =============
-    if type=="max":          # maximum   S-NORM : MAX(A,B)
+    if norm_type=="max":          # maximum   S-NORM : MAX(A,B)
         z=max(x,y)
     
-    elif (type=="prod"):     #ALGEBRAIC-SUM S-NORM : A + B - AB
+    elif (norm_type=="prod"):     #ALGEBRAIC-SUM S-NORM : A + B - AB
         z=x+y-x*y
     
-    elif (type=="eprod"):    #EINSTEIN - SUM S - NORM : (A + B)/ (1 + AB)
+    elif (norm_type=="eprod"):    #EINSTEIN - SUM S - NORM : (A + B)/ (1 + AB)
         a=y*x
         z=(x+y)/(1.+a)
 
@@ -74,18 +81,18 @@ def snorm(x,y,type):
 
 # ====== complement =============
 def complement(x,type):
-    """ compute complement of x accortdign to "type" metrhod:
+    """
+    Compute complement of x accortdign to "type" metrhod:
     "one" - classic complement, "sugeno" - sugeno complement
-    :param x:    imput 
+
+    :param x:    imput
     :param type:  "one" or "sugeno" type complement
     :return: complement of input x 
     """
     a=1
-    y=0.
-    
+    y=0.0
     if (type=="one"):         # classic complement
         y=1-x
-    
     elif (type=="sugeno"):
         tmp1 = 1.0/a
         y=(1.0-a*x)*tmp1       # sugeno complement
@@ -94,18 +101,22 @@ def complement(x,type):
 
 
 def defuzzy(y, method):
-    # TODO : implement method
+    """
+    Defuzzify membership function with defined method.
+    'centroid'  -CENTROID
+    'mom'        MEAN OF MAXIMUM (MOM)
+    'som'        SHORTEST OF MAXIMUM (SOM)
+    'lom'        LARGEST OF MAXIMUM (LOM)
+    'bisector'   BISECTOR
 
-    # method: centroid
-    #         mom - MEAN OF MAXIMUM (MOM)
-    #         som -SHORTEST OF MAXIMUM (SOM)
-    #         lom -LARGEST OF MAXIMUM (LOM)
-    #         bisector
+    :param y:
+    :param method: defuzzy method: 'centroid','mom','som','lom','bisector
+    :return: None
+    """
     tmp = 0
     out = 0
 
     if method == 'centroid':  # centroid
-
         tmp = np.sum(y)
         for i in range(0, len(y)):
             out = out + i * y[i]
@@ -127,7 +138,6 @@ def defuzzy(y, method):
         out = out / tmp1
 
     elif method == 'som':  # SHORTEST OF MAXIMUM (SOM)
-
         out = 0
         tmp = y[0]
         for i in range(1, len(y)):
@@ -152,9 +162,7 @@ def defuzzy(y, method):
                 tmp = y[i]
                 
     elif method == 'bisector':
-
         out = 0
-
         tmp=np.sum(y)
         if tmp>0:
             tmp=tmp/2.0
@@ -168,8 +176,10 @@ def defuzzy(y, method):
     return out
 
 def evaluate(fis,x):
-    """ compute fuzzy output for x=[x1,x2..] input anf fizzy fis structure
-    :param fis: fuzzy structure
+    """
+    Compute fuzzy output of fis system for inputs x=[x1,x2...]
+
+    :param fis: fuzzy structure (fism class) of fuzzy system
     :param x:   input vector data
     :return:    fuzzy out
     """
@@ -208,7 +218,7 @@ def evaluate(fis,x):
             tmp2[rule]=y*fis.RuleWeights[rule] 
             
         else:
-            print('AND operator')
+            #print('AND operator')
             y=tmp[0]
             for i in range(1,fis.Ninputs):    
                 y=tnorm(tmp[i],y,fis.ANDmethod)
@@ -217,9 +227,8 @@ def evaluate(fis,x):
     
     # defuzzyfication-------------------------
     y = [0]*fis.Noutputs
-
     out_mfcsum = [0] * (fis.Noutputs + 1)
-    
+
     for i in range(1, fis.Noutputs + 1):
         out_mfcsum[i] = out_mfcsum[i - 1] + fis.Nout_mf[i - 1]
    # - mamdani
@@ -238,7 +247,7 @@ def evaluate(fis,x):
 
                 if idx>0:
                     pt1 = idx + out_mfcsum[outp]-1
-                    print(pt1)
+
                     for i in range(0,fis.Npts):
                         tmp3[i,1]=eval_mf(i*dx,fis.mfparo[pt1][:])
 
@@ -281,7 +290,6 @@ def evaluate(fis,x):
 
     elif fis.type == 'tsk':
         for outp in range(0, fis.Noutputs):
-            print(fis.Noutputs)
             sum1 = 0.0
             sum2 = 0.0
             for rule in range(0, fis.NRules):
@@ -302,4 +310,25 @@ def evaluate(fis,x):
     return y
 
 
+def getsurf(fis,Npts,in1=1,in2=2,out=1):
+    """
+    Generate fuzzy system surface
 
+    :param fis:  fis structure
+    :param Npts: No of points
+    :param in1: No of input 1
+    :param in2: No of input 2
+    :param out: No of outpt
+    :return: X,Y,Z - x,y cooordinates and z: data surface value
+    """
+    dx1 = (fis.varRange[in1-1][1]-fis.varRange[in1-1][0])/float(Npts)
+    dx2 = (fis.varRange[in2-1][1]-fis.varRange[in2-1][0])/float(Npts)
+    Z = np.zeros((Npts+1,Npts+1))
+    for i in range(0,Npts+1):
+        for j in range(0,Npts+1):
+            Z[i, j]=evaluate(fis,[dx1*i,dx2*j])[out-1]
+
+    X = np.array(range(0, Npts + 1)) * dx1
+    Y = np.array(range(0, Npts + 1)) * dx2
+
+    return X,Y,Z
