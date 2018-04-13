@@ -21,28 +21,39 @@ __license__ = "GPL"
 __email__ = "szydlowski.lu@gmial.com"
 __status__ = "Development"
 __version__ = "1.0.0.dev1"
+
 import numpy as np
 
 
 mftypes=['trimf','trapmf','gaussmf','gauss2mf','gbellmf','sigmf','singleton']
 
 def trimf(xn,param):
-    """ Triangular membership function
+    """
+    Triangular membership function
     compute value of triangular f(xn,a,b,c)=max(min((x-a)/(b-a),(c-x)/(c-b)),0)
+
     :param xn: input calue
-    :param param: param[0]=a,param[1]=b,param[2]=c
-    :return:
+    :param param: [1x3] vector: param[0]=a,param[1]=b,param[2]=c
+    :type xn: float
+    :type param: float
+    :return: value of triangular mf
+    :rtype: float
     """
     return max(min((xn-param[0])/(param[1]-param[0]),(param[2]-xn)/(param[2]-param[1])),0)
 
 
 def trapmf(xn,param):
-    """ Trapezoidal membership function
-      compute value of trapesoidal-shape function.
-      trapezoid is described by parames: a<=b <=c <= d
+    """
+    Trapezoidal membership function
+    compute value of trapesoidal-shape function.
+    trapezoid is described by parames: a<=b <=c <= d
+
     :param xn: input calue
-    :param param: Trapezoid parameters: [a,b,c,d]
-    :return:
+    :param param: ([1x4] vector) Trapezoid parameters: param=[a,b,c,d]
+    :type xn: float
+    :type param: float
+    :return: value of Trapezoid mf
+    :rtype: float
     """
     a = param[0]
     b = param[1]
@@ -61,12 +72,17 @@ def trapmf(xn,param):
     
     return y
 
-def gaussmf(xn,param): # TODO description
-    """Copute gaussian function membership
+def gaussmf(xn,param):
+    """
+    Copute gaussian function membership
     return value  of symmetric Gaussian function depends of param=[sigma, const]
+
     :param xn:  input sample
-    :param param: param = [sigma value, expected value]
+    :param param: [1x2] vector  = [sigma value, expected value]
+    :type xn: float
+    :type param: float
     :return: return value  of symmetric Gaussian function
+    :rtype: float
     """
     sigma=param[0]
     c=param[1]
@@ -79,11 +95,16 @@ def gaussmf(xn,param): # TODO description
     return np.exp(tmp1/tmp2)
     
 def gauss2mf(xn,param): # TODO description
-    """Copute gaussian function membership
+    """
+    Copute gaussian function membership
     return value  of nonsymmetric Gaussian function depends of param=[σ1, c1,σ2, c2]
+
     :param xn: input sample
     :param param: [sigma1, const.1,sigma 2, const.2]
+    :type xn: float
+    :type param: float
     :return: value of nonsymmetric Gaussian function
+    :rtype: float
     """
     sigma1=param[0]
     c1=param[1]
@@ -105,13 +126,18 @@ def gauss2mf(xn,param): # TODO description
 
 
 def gbellmf(xn,param): # TODO description
-    """ Generalized bell-shaped membership function
-     retur value of Generalized bell-shaped function:
-     f(x,a,b,c)= gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)
+    """
+    Generalized bell-shaped membership function
+    retur value of Generalized bell-shaped function:
+    f(x,a,b,c)= gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)
 
     :param xn: input sampple
     :param param: [a,b,c]
+    :type xn: float
+    :type param: float
     :return: value of Generalized bell-shaped
+    :rtype: float
+
     """
     a = param[0]
     b = param[1]
@@ -124,11 +150,17 @@ def gbellmf(xn,param): # TODO description
     
 
 def sigmf(xn,param): # TODO description
-    """ Sigmoidal membership function
+    """
+    Sigmoidal membership function
     f(x,[a,c]) = sigmf[x,[a,c]] = 1/(1+exp(-a(x−c)))
+
     :param xn: input sample
     :param param: =[a,c]
+    :type xn: float
+    :type param: float
     :return: value of sigmoidal function
+    :rtype: float
+
     """
     a = param[0]
     c = param[1]
@@ -137,7 +169,9 @@ def sigmf(xn,param): # TODO description
     
     
 def singletonmf(xn,param):
-    """ singleton function
+    """
+    singleton function
+
     :param xn:
     :param param: [x0]
     :return:
@@ -153,13 +187,16 @@ def singletonmf(xn,param):
     
 
 def eval_mf(xn,params):
-    """ return value of mf function for input xn.
+    """
+    Eeturn value of mf function for input xn.
     type, and parameterts of mf stored in params vector where:
     params=[mf code, mf params] :
-        mf code: 0='trimf',1='trapmf',3='gaussmf',4='gauss2mf',5='gbellmf',6='sigmf',7='singleton']
+    mf code: 0='trimf',1='trapmf',3='gaussmf',4='gauss2mf',5='gbellmf',6='sigmf',7='singleton']
 
     :param xn: intup value
     :param params: [mf code, mf params]
+    :type xn: float
+    :type params: vector
     :return:  value of mf an xn
     """
     mf_type=params[0]

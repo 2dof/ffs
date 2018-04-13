@@ -24,8 +24,6 @@ __version__ = "1.0.0.dev1"
 
 from mfs import *
 
-
-
 def tnorm(x,y,norm_type):
     """
     Return "type" tnorm of input x and y.
@@ -56,9 +54,9 @@ def tnorm(x,y,norm_type):
 def snorm(x,y,norm_type):
     """
     Compute "type" s-norm for input data x,y.
-    the s-norm types: "max" - maximum: MAX(x,y)
-                      "prod" - algebric sum: x + y - xy
-                      "prod" - einstein sum: (x + y)/ (1 + xy)
+    the s-norm types:"max" - maximum: MAX(x,y),
+    "prod" - algebric sum: x + y - xy
+    "prod" - einstein sum: (x + y)/ (1 + xy)
 
     :param x:   input data 1
     :param y:   input data 2
