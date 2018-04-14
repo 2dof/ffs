@@ -1,6 +1,5 @@
 .DS_STORE
 
-docs/
 ffs/example_01.py 
 ffs/example_02.py
 ffs/unitTestes.py
