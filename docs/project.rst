@@ -6,8 +6,8 @@ Mamdani and Sugeno inference.
 
 Actual status
 ----------------
-:Version: 1.0.0
-:Status:    developing version
+:Version: 1.0.0 dev
+:Status:    developing
 
 Done:
 +++++

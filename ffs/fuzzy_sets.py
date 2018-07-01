@@ -56,7 +56,7 @@ def snorm(x,y,norm_type):
     Compute "type" s-norm for input data x,y.
     the s-norm types:"max" - maximum: MAX(x,y),
     "prod" - algebric sum: x + y - xy
-    "prod" - einstein sum: (x + y)/ (1 + xy)
+    "eprod" - einstein sum: (x + y)/ (1 + xy)
 
     :param x:   input data 1
     :param y:   input data 2
@@ -269,7 +269,7 @@ def evaluate(fis,x):
                     for i in range(0,fis.Npts):
                         tmp3[i,0]=max(tmp3[i,0],tmp3[i,1])
 
-                elif  fis.Aggmethod == 'sum':         #  sum
+                elif  fis.Aggmethod == 'sum''sum':         #  sum
 
                     for i in range(0,fis.Npts):
                         tmp3[i,0]=tmp3[i,0]+tmp3[i,1]

@@ -4,15 +4,18 @@ API Documentation
 :Status:    developing version
 
 .. automodule:: fuzzy
+    :member-order: 'bysource'
 
 Fuzzy class
 -----------
 .. autoclass:: fism
     :members:
+    :member-order: 'bysource'
 
 Memebrship Functions
 --------------------
 .. automodule:: mfs
+    :member-order: 'bysource'
     :members:
 
 Fuzzy sets

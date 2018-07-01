@@ -20,13 +20,13 @@ sys.path.insert(0, os.path.abspath('C:/Users/user/PycharmProjects/ffs/ffs'))
 # -- Project information -----------------------------------------------------
 
 project = u'ffs'
-copyright = u'2018, Lukasz'
+copyright = u'2018, Lukasz Szydlowski'
 author = u'Lukasz'
 
 # The short X.Y version
 version = u'1.0.0'
 # The full version, including alpha/beta/rc tags
-release = u'Beta'
+release = u'alpha'
 
 
 # -- General configuration ---------------------------------------------------
@@ -77,7 +77,7 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'bizstyle'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -100,7 +100,7 @@ html_static_path = ['_static']
 #
 # html_sidebars = {}
 
-
+#autoclass_content = 'both'
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.

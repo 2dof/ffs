@@ -29,8 +29,8 @@ mftypes=['trimf','trapmf','gaussmf','gauss2mf','gbellmf','sigmf','singleton']
 
 def trimf(xn,param):
     """
-    Triangular membership function
-    compute value of triangular f(xn,a,b,c)=max(min((x-a)/(b-a),(c-x)/(c-b)),0)
+    Compute value of triangular membership function
+    :math:`f(x_n,a,b,c)=max(min((x-a)/(b-a),(c-x)/(c-b)),0)`.
 
     :param xn: input calue
     :param param: [1x3] vector: param[0]=a,param[1]=b,param[2]=c
@@ -46,7 +46,7 @@ def trapmf(xn,param):
     """
     Trapezoidal membership function
     compute value of trapesoidal-shape function.
-    trapezoid is described by parames: a<=b <=c <= d
+    trapezoid is described by parameters: :math:`a<=b <=c <= d`
 
     :param xn: input calue
     :param param: ([1x4] vector) Trapezoid parameters: param=[a,b,c,d]
@@ -75,7 +75,8 @@ def trapmf(xn,param):
 def gaussmf(xn,param):
     """
     Copute gaussian function membership
-    return value  of symmetric Gaussian function depends of param=[sigma, const]
+    return value  of symmetric Gaussian function
+    :math:`gaussmf(x,[\sigma,c])= e^{\\frac{-(x-c)^2}{2\sigma^2}}`
 
     :param xn:  input sample
     :param param: [1x2] vector  = [sigma value, expected value]
@@ -94,7 +95,7 @@ def gaussmf(xn,param):
     
     return np.exp(tmp1/tmp2)
     
-def gauss2mf(xn,param): # TODO description
+def gauss2mf(xn,param):
     """
     Copute gaussian function membership
     return value  of nonsymmetric Gaussian function depends of param=[σ1, c1,σ2, c2]
@@ -129,7 +130,7 @@ def gbellmf(xn,param): # TODO description
     """
     Generalized bell-shaped membership function
     retur value of Generalized bell-shaped function:
-    f(x,a,b,c)= gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)
+    :math:`f(x,a,b,c)= gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)`.
 
     :param xn: input sampple
     :param param: [a,b,c]
@@ -152,7 +153,8 @@ def gbellmf(xn,param): # TODO description
 def sigmf(xn,param): # TODO description
     """
     Sigmoidal membership function
-    f(x,[a,c]) = sigmf[x,[a,c]] = 1/(1+exp(-a(x−c)))
+
+    :math: 'f(x,[a,c]) = sigmf[x,[a,c]] = 1/(1+exp(-a(x−c)))'
 
     :param xn: input sample
     :param param: =[a,c]

@@ -26,35 +26,83 @@ __version__ = "1.0.0.dev1"
 import numpy as np
 from mfs import mftypes
 
-__version__ = "1.0.0.dev1"
 
 class fism:
     """
-     Fuzzy data structure. fism store konfiguration and settings of fuzzy system.
+    Class object storing settings and configuration parameters (data attributes)
+    for Fuzzy Mamdani or Tagaki-Sugeno type Fuzzy system.\n
+    By default initialization mamdani type fuzzy is set with settings:\n
+    **ANDmethod:** Tnorm 'min'\n
+    **ORmethod:**  Snorm 'max'\n
+    **Implication method:** Tnorm 'min'\n
+    **Aggregation method:**  'max'\n
+    **Deffuzyfication method:** 'centroid'\n
+
+    .. note:: fism in ver.1.0.0 is only fuzzy structure container. Fuzzy Inference Process is implemented by evaluate(fis,x) from fuzzy_sets.py.
+
+    =================   ==============   ========================================================
+    Atributes           format           Description
+    =================   ==============   ========================================================
+    **type**            string           ='mamdani' or 'tsk' : type of fuzzy system
+    **Ninputs**         Int              Number of inputs
+    **Noutputs**        Int              Number of outputs
+    **varName**         string           list, store of variable names
+    **varRange**        [float,float]    store of variable physical range
+    **ORmethod**        string           default:'max' other: 'prod' 'eprod
+    **ANDmethod**       string           default 'min' , other: ,'prod' , eprod'
+    **Implmethod**      string           Implication method, default: 'min' . other:'tnorm eprod'
+    **Aggmethod**       string           Aggregation Method, default: 'max'
+    **Defuzzymethod**   string           Defuzzyfication Method, defalult: 'centroid'
+    **RuleList**        2D int array     store rules (Array Nrules x(Ninputs+Noutputs+1
+    **RuleWeights**     1D float array   list of Rule's weights
+    **mfnames_in**      string list      list, names of input's mf
+    **mfnames_out**     string           list, names of output's mf
+    **mfpari**          2D float array   array list of inputs mf types and parameters
+    **mfparo**          2D float array   array list of outrputs mf types and parameters
+    **Nin_mf**          Int list         list, Numbenr of inputs mf  [N_mf in1, N_mf in2...]
+    **Nout_mf**         Int list         list, Numbenr of inputs mf  [N_mf out1, N_mf out2...]
+    **Npts**            Int              No of points resolution for defuzzyfication proces
+    =================   ==============   ========================================================
+
+    **Example initialization**
+
+    .. code-block:: python
+
+        from fuzzy  import *
+        from fuzzy_sets import *
+
+        fis1 = fism()               # empty mamdani fuzzy structure
+        fis2 = fism('mamdani',2,1)  # 2 input, 1 output mamdani fuzzy structrue
+
     """
-    
-    # Constructor
     def __init__(self, type ='mamdani', Ninputs =0 ,Noutputs = 0):
         """
         Initialize fuzzy data structure for fuzzy system
-
-        :param type:    type of fuzzy inference system : mamdani or tsk
-        :param Ninputs: No of inputs
-        :param Noutputs: No of outputs
         """
-        self.type = type                    # type = mamdani , sugeno
-        self.Ninputs    = Ninputs              # (int)
-        self.Noutputs = Noutputs            # (int)
-        self.varName = []                   # list of variablee names
-        self.varRange = []                  # list of variables range
-        self.ORmethod = 'max'               # OR method
-        self.ANDmethod = 'min'              # AND method
-        self.Implmethod = 'min'             # Implication method
-        self.Aggmethod = 'max'              # Aggregation Method:
+        self.type = type                    # 'mamdani' or 'tsk'
+        self.ORmethod = 'max'               # OR method Snorms: 'max', 'prod' 'eprod'
+        self.ANDmethod = 'min'              # AND method Tnorms: ,'min' ,'prod' , eprod'
+        self.Implmethod = 'min'             # Implication method: tnorm eprod
+        self.Aggmethod = 'max'              # Aggregation Method:'sum','eprod' , 'prod'
         self.Defuzzymethod = 'centroid'     # or 'mom', 'som', 'lom', 'bisector'
+        self.NRules =0
+        self.RuleList =(np.zeros((1,0 +0+1))).astype(int)
+        self.RuleWeights=[1.0]*self.NRules
+
+        self.Ninputs    =0                  # (int)
+        self.Noutputs   =0                  # (int)
+        self.varName = []  # list of variablee names
+        self.varRange = []  # list of variables range
 
         self.Nin_mf = [0]*self.Ninputs
         self.Nout_mf = [0] * self.Noutputs
+
+        if Ninputs>0:
+            for i in range(Ninputs):
+                self.addvar('in', 'in'+str(i+1),[0,100])
+        if Noutputs > 0:
+            for i in range(Noutputs):
+                self.addvar('out', 'out' + str(i + 1), [0, 100])
 
         self.mfnames_in = ['A1']
         self.mfnames_out = ['y1']
@@ -69,19 +117,12 @@ class fism:
             else:
                 self.mfparo = np.zeros((1, self.Ninputs))  # [type,param1,param2,param3,param3
 
-
         self.Npts =100
 
-        self.NRules =0
-        self.RuleList =(np.zeros((1,Ninputs +Noutputs+1))).astype(int)
-        self.RuleWeights=[1.0]*self.NRules
-
-        # add row to ther end
-        #insert(a, len(a), np.zeros((1, 4)), axis=0)
 
     def addvar(self,type,name,range):
         """
-        Add wariable ( input or output) to the fuzzy system
+        Add wariable (input or output) to the fuzzy system
 
         :param type: 'in' or 'out'
         :type type: string
@@ -89,7 +130,14 @@ class fism:
         :type name: string
         :param range: [min,max] ragne value of variable
         :type tange: [double,double]
-        :returns: None
+
+        **Example**
+
+        .. code-block:: python
+        
+            fis1.addvar('in','x1',[0.,3.0])
+            fis1.addvar('in','x2',[0.,3.0])
+            fis1.addvar('out','y1',[0.,3.0])
 
         """
         if (type=='in'):
@@ -111,13 +159,12 @@ class fism:
 
     def delvar(self, var_type, idx):
         """
-        Delete variable from fis system
+        Delete variable from fism structure
 
-        :param var_type:"in" or "out" type variable
+        :param var_type: "in" or "out" type variable
         :param idx: No of variable
         :type var_type: string
         :type idx: Int
-        :returns: None
         """
 
         if (var_type == 'in'):
@@ -143,7 +190,7 @@ class fism:
         """
         Add membership function to fuzzy structute
 
-        :param var_type:      input("in") or output("out")
+        :param var_type:  "in" or "out" type variable
         :param var_index: Number od added mf
         :param namemf:    name of membership function
         :param typemf:    type of mf: 'trimf','trapmf','gaussmf','gauss2mf','gbellmf','sigmf','singleton'
@@ -153,7 +200,7 @@ class fism:
         :type namemf:     string
         :type typemf:     string
         :type parammf:    string
-        :return: None
+
         """        
         if var_type =="in":                         #  #  TODO add names and add in_mfcsum to fis structure
             self.Nin_mf[var_index-1]+=1
@@ -208,13 +255,13 @@ class fism:
         """
         Delete membership function from fuzzy system
 
-        :param var_type:
-        :param var_index:
-        :param mf_index):
+        :param var_type:  variable type: input("in") or output("out")
+        :param var_index: No. of variable
+        :param mf_index:  No. of mf
         :type type:      string
         :type var_index: Int
-        :type mf_index:  Idx
-        :return:
+        :type mf_index:  Int
+
         """
         if var_type =="in":                         
                    
@@ -260,7 +307,7 @@ class fism:
         """
         Set new parameters for members ship function for input/output
 
-        :param var_type:  variable type: 'in' or 'out'
+        :param var_type:  variable type: input("in") or output("out")
         :param var_index: index of variable
         :param mf_idx:    No of mf function
         :param typemf:    type of mf
@@ -270,7 +317,7 @@ class fism:
         :type mf_idx:    Int
         :type typemf:    string
         :type parammf:   list of doubles
-        :return: None
+
         """
         if var_type =="in":
             in_mfcsum= [0] * (self.Ninputs+1)
@@ -297,24 +344,35 @@ class fism:
 
     def getmf(self, var_type,var_index):
         """
-        Return list of mf function of varianle
+        Return list of membership function of input or output
 
         :param var_type:  variable type: 'in' or 'out'
-        :param var_index: index of variable
+        :param var_index: index of variable 1...
         :type var_type:   string
         :type var_index:  Int
-        :return:  mf list
+        :return:  mf list ie mf_list[i]=[name_i,type, params], i=0..Nmf-1
         """
-        # TODO implement this method
+        Nmf= self.Nin_mf[var_index-1] if var_type == "in" else self.Nout_mf[var_index-1]
+        mf_list = [0] *Nmf
+
+        if var_type =="in":
+            for i in range(0,Nmf):
+                mf_list[i]=[self.mfnames_in[i],mftypes[int(self.mfpari[i][0])],self.mfpari[i][0:-1]]
+
+
+        else:
+            for i in range(0,Nmf):
+                mf_list[i]=[self.mfnames_out[i],mftypes[int(self.mfparo[i][0])],self.mfpari[i][0:-1]]
+
+        return mf_list
 
     def addrule(self, rule,weight):
         """ Add rule to fuzzy structure.
 
-        :param rule:   rule list
-        :param weight: double
+        :param rule:   rule
+        :param weight: weightinh param
         :type rule:     list od Int
         :type weight:   double
-        :return: None
         """
         rule=np.array(rule).astype(int)
         rows=rule.ndim 
@@ -333,9 +391,9 @@ class fism:
         """
         Delete rule from fuzzy structure
 
-        :param ruleNo: No of rule
+        :param ruleNo: Rule's number
         :type ruleNo: Int
-        :return:
+
         """
         print('delete rule')
         if self.NRules > 0 & ruleNo<=self.NRules :

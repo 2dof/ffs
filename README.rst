@@ -5,15 +5,15 @@ Mamdani and Sugeno inference.
 
 .. note::
 I use this simple library for R&D fuzzy control and process simulation based on Python.
-I'm used to working with fuzzy tolboxes from matlab and Scilan(sciFLT) so i tried to keep similar convention.
+I'm used to working with fuzzy tolboxes from Matlab and Scilab(sciFLT) so i tried to keep similar convention.
 
 Project Summary
 ===============
 
 Actual status
 ----------------
-:Version: 1.0.0
-:Status:    developing version
+:Version: 1.0.0 dev1
+:Status:    developing
 
 Done:
 +++++
