@@ -88,12 +88,12 @@ class TestFUZZY_SETS(unittest.TestCase):
         self.assertEqual(snorm(1,2,'eprod'), 1)
 
     def test_complement(self):
-        print("test complement method")
+        #print("test complement method")
         self.assertEqual(complement(0.3, 'one'), 0.7)
         self.assertEqual(complement(0.3, 'sugeno'), 0.7)
 
     def test_defuzzy(self):
-        print("test defuzzyfucation method")
+       # print("test defuzzyfucation method")
         y=[0, 0.5, 1, 1, 0.5, 0]
 
         x1 = defuzzy(y, 'centroid')
@@ -101,7 +101,7 @@ class TestFUZZY_SETS(unittest.TestCase):
         x3 = defuzzy(y, 'som')
         x4 = defuzzy(y, 'lom')
         x5 = defuzzy(y, 'bisector')
-        print([x1,x2,x3,x4,x5])
+        #print([x1,x2,x3,x4,x5])
         self.assertEqual(x1,2.5)
         self.assertEqual(x2,2.5)
         self.assertEqual(x3,2)
@@ -139,4 +139,5 @@ class TestFUZZY(unittest.TestCase):
 if __name__ == '__main__':
     print('test run')
     unittest.main()
+
 #python -m unittest test_fuzzy.py

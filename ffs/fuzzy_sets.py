@@ -55,7 +55,7 @@ def snorm(x,y,norm_type):
     """
     Compute "type" s-norm for input data x,y.
     the s-norm types:"max" - maximum: MAX(x,y),
-    "prod" - algebric sum: x + y - xy
+    "prod" - algebraic sum: x + y - xy
     "eprod" - einstein sum: (x + y)/ (1 + xy)
 
     :param x:   input data 1
@@ -80,12 +80,14 @@ def snorm(x,y,norm_type):
 # ====== complement =============
 def complement(x,type):
     """
-    Compute complement of x accortdign to "type" metrhod:
+    Compute complement of x according to "type" method:
     "one" - classic complement, "sugeno" - sugeno complement
 
-    :param x:    imput
+    :param x:    iput value
     :param type:  "one" or "sugeno" type complement
-    :return: complement of input x 
+    :type x: float
+    :return: complement of input x
+    :rtype: float
     """
     a=1
     y=0.0
@@ -109,6 +111,8 @@ def defuzzy(y, method):
 
     :param y:
     :param method: defuzzy method: 'centroid','mom','som','lom','bisector
+    :type y: folat[]
+    :type method: String
     :return: None
     """
     tmp = 0
@@ -116,9 +120,11 @@ def defuzzy(y, method):
 
     if method == 'centroid':  # centroid
         tmp = np.sum(y)
+        #print(y)
         for i in range(0, len(y)):
             out = out + i * y[i]
-
+        
+        #print([method,tmp])
         out = out / float(tmp)
 
     elif method == 'mom':  # MEAN OF MAXIMUM (MOM)
@@ -179,7 +185,10 @@ def evaluate(fis,x):
 
     :param fis: fuzzy structure (fism class) of fuzzy system
     :param x:   input vector data
+    :type fis: fism object
+    :type x: float[]
     :return:    fuzzy out
+    :rtype: float
     """
     in_mfcsum= [0] * (fis.Ninputs+1)
             
@@ -197,6 +206,8 @@ def evaluate(fis,x):
 
             if (idx > 0):
                 pt1 = idx + in_mfcsum[inp]-1
+#                print( in_mfcsum)
+#                print([idx,inp,pt1,'--',fis.mfpari[pt1][:]]) 
                 tmp[inp] = eval_mf(x[inp],fis.mfpari[pt1][:])
                 
                 if (isgn <0):      # not 
