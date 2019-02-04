@@ -6,6 +6,6 @@ lessons
 
 Lesson 1 
 
-bla bla bla  hahahah
+ to do...
 
-Lesson 3 
+ 

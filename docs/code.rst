@@ -13,7 +13,7 @@ Fuzzy class
     :member-order: 'bysource'
 
 Memebership Functions
---------------------
+---------------------
 .. automodule:: mfs
     :member-order: 'bysource'
     :members:

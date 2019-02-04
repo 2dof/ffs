@@ -32,7 +32,7 @@ def trimf(xn,param):
     Compute value of triangular membership function
     :math:`f(x_n,a,b,c)=max(min((x-a)/(b-a),(c-x)/(c-b)),0)`.
 
-    :param xn: input calue
+    :param xn: input value
     :param param: [1x3] vector: param[0]=a,param[1]=b,param[2]=c
     :type xn: float
     :type param: float
@@ -45,10 +45,10 @@ def trimf(xn,param):
 def trapmf(xn,param):
     """
     Trapezoidal membership function
-    compute value of trapesoidal-shape function.
+    compute value of trapezoidal shape function.
     trapezoid is described by parameters: :math:`a<=b <=c <= d`
 
-    :param xn: input calue
+    :param xn: input value
     :param param: ([1x4] vector) Trapezoid parameters: param=[a,b,c,d]
     :type xn: float
     :type param: float
@@ -74,7 +74,7 @@ def trapmf(xn,param):
 
 def gaussmf(xn,param):
     """
-    Copute gaussian function membership
+    Compute gaussian function membership
     return value  of symmetric Gaussian function
     :math:`gaussmf(x,[\sigma,c])= e^{\\frac{-(x-c)^2}{2\sigma^2}}`
 
@@ -97,7 +97,7 @@ def gaussmf(xn,param):
     
 def gauss2mf(xn,param):
     """
-    Copute gaussian function membership
+    Compute nonsymmetric gaussian function membership
     return value  of nonsymmetric Gaussian function depends of param=[σ1, c1,σ2, c2]
 
     :param xn: input sample
@@ -132,7 +132,7 @@ def gbellmf(xn,param): # TODO description
     retur value of Generalized bell-shaped function:
     :math:`f(x,a,b,c)= gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)`.
 
-    :param xn: input sampple
+    :param xn: input value
     :param param: [a,b,c]
     :type xn: float
     :type param: float
@@ -156,7 +156,7 @@ def sigmf(xn,param): # TODO description
 
     :math: 'f(x,[a,c]) = sigmf[x,[a,c]] = 1/(1+exp(-a(x−c)))'
 
-    :param xn: input sample
+    :param xn: input value
     :param param: =[a,c]
     :type xn: float
     :type param: float
@@ -174,7 +174,7 @@ def singletonmf(xn,param):
     """
     singleton function
 
-    :param xn:
+    :param xn:  input value
     :param param: [x0]
     :return:
     """
@@ -190,12 +190,12 @@ def singletonmf(xn,param):
 
 def eval_mf(xn,params):
     """
-    Eeturn value of mf function for input xn.
-    type, and parameterts of mf stored in params vector where:
+    Return value of mf function for input xn.
+    type, and parameters of mf stored in params vector where:
     params=[mf code, mf params] :
     mf code: 0='trimf',1='trapmf',3='gaussmf',4='gauss2mf',5='gbellmf',6='sigmf',7='singleton']
 
-    :param xn: intup value
+    :param xn: input value
     :param params: [mf code, mf params]
     :type xn: float
     :type params: vector

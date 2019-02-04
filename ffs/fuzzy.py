@@ -61,7 +61,7 @@ class fism:
     **mfparo**          2D float array   array list of outrputs mf types and parameters
     **Nin_mf**          Int list         list, Numbenr of inputs mf  [N_mf in1, N_mf in2...]
     **Nout_mf**         Int list         list, Numbenr of inputs mf  [N_mf out1, N_mf out2...]
-    **Npts**            Int              No of points resolution for defuzzyfication proces
+    **Npts**            Int              No of points resolution for defuzzyfication process
     =================   ==============   ========================================================
 
     **Example initialization**
@@ -72,7 +72,7 @@ class fism:
         from fuzzy_sets import *
 
         fis1 = fism()               # empty mamdani fuzzy structure
-        fis2 = fism('mamdani',2,1)  # 2 input, 1 output mamdani fuzzy structrue
+        fis2 = fism('mamdani',2,1)  # 2 input, 1 output mamdani fuzzy structure
 
     """
     def __init__(self, type ='mamdani', Ninputs =0 ,Noutputs = 0):
@@ -122,19 +122,19 @@ class fism:
 
     def addvar(self,type,name,range):
         """
-        Add wariable (input or output) to the fuzzy system
+        Add variable (input or output) to the fuzzy system
 
         :param type: 'in' or 'out'
         :type type: string
-        :param name: name od variable
+        :param name: name of variable
         :type name: string
-        :param range: [min,max] ragne value of variable
+        :param range: [min,max] range value of variable
         :type tange: [double,double]
 
         **Example**
 
         .. code-block:: python
-        
+
             fis1.addvar('in','x1',[0.,3.0])
             fis1.addvar('in','x2',[0.,3.0])
             fis1.addvar('out','y1',[0.,3.0])
@@ -188,10 +188,10 @@ class fism:
 
     def addmf(self,var_type,var_index,namemf,typemf,parammf ):
         """
-        Add membership function to fuzzy structute
+        Add membership function (mf) to fuzzy structure
 
         :param var_type:  "in" or "out" type variable
-        :param var_index: Number od added mf
+        :param var_index: Number of added mf
         :param namemf:    name of membership function
         :param typemf:    type of mf: 'trimf','trapmf','gaussmf','gauss2mf','gbellmf','sigmf','singleton'
         :param parammf:   [param 1, param2, param 3, param 4]
@@ -201,7 +201,7 @@ class fism:
         :type typemf:     string
         :type parammf:    string
 
-        """        
+        """
         if var_type =="in":                         #  #  TODO add names and add in_mfcsum to fis structure
             self.Nin_mf[var_index-1]+=1
             
@@ -305,7 +305,7 @@ class fism:
 
     def setmf(self, var_type,var_index,mf_index,typemf,parammf):
         """
-        Set new parameters for members ship function for input/output
+        Set new parameters for members ship function (mf) for input/output
 
         :param var_type:  variable type: input("in") or output("out")
         :param var_index: index of variable
@@ -370,8 +370,8 @@ class fism:
         """ Add rule to fuzzy structure.
 
         :param rule:   rule
-        :param weight: weightinh param
-        :type rule:     list od Int
+        :param weight: weighting parameter
+        :type rule:     list of Int
         :type weight:   double
         """
         rule=np.array(rule).astype(int)
