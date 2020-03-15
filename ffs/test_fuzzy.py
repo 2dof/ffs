@@ -111,6 +111,7 @@ class TestFUZZY(unittest.TestCase):
 
 
     def setUp(self):
+        print("setup")
         fis1 = fism()
         fis1.addvar('in', 'x1', [0., 3.0])
         fis1.addvar('in', 'x2', [0., 3.0])
@@ -128,7 +129,7 @@ class TestFUZZY(unittest.TestCase):
         fis1.addmf('out', 1, 'C2', 'trimf', [0, 1, 2, 0])
         fis1.addmf('out', 1, 'C3', 'trimf', [1, 2, 3, 0])
         self.fis1=fis1
-        pass
+     
 
     def test_addvar(self):
 
@@ -138,6 +139,10 @@ class TestFUZZY(unittest.TestCase):
 
 if __name__ == '__main__':
     print('test run')
+<<<<<<< HEAD
+    unittest.main(verbosity=2)
+=======
     unittest.main()
+>>>>>>> 326973819667aec49e1336fb0f350bfa151a3155
 
 #python -m unittest test_fuzzy.py
