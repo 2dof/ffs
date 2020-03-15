@@ -127,6 +127,7 @@ def gauss2mf(xn,param):
 
 
 def gbellmf(xn,param): # TODO description
+<<<<<<< HEAD
     """ 
         Generalized bell-shaped membership function
         retur value of Generalized bell-shaped function:
@@ -138,6 +139,21 @@ def gbellmf(xn,param): # TODO description
         :return:           value of Generalized bell-shaped,
         :rtype:            float,
     """ 
+=======
+    """
+    Generalized bell-shaped membership function
+    retur value of Generalized bell-shaped function:
+    :math:`f(x,a,b,c)= gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)`.
+
+    :param xn: input value
+    :param param: [a,b,c]
+    :type xn: float
+    :type param: float
+    :return: value of Generalized bell-shaped
+    :rtype: float
+
+    """
+>>>>>>> 326973819667aec49e1336fb0f350bfa151a3155
     a = param[0]
     b = param[1]
     c = param[2]

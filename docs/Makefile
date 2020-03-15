@@ -6,6 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = ffs
 SOURCEDIR     = .
+<<<<<<< HEAD
 BUILDDIR      = _build
 #BUILDDIR    = ../../ffs-docs
 PDFBUILDDIR = /tmp
@@ -19,6 +20,18 @@ latexpdf:
     #         ^^^
     cp $(PDFBUILDDIR)/latex/*.pdf $(PDF)
     #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=======
+# BUILDDIR      = _build
+BUILDDIR    = ../../ffs-docs
+PDFBUILDDIR = /tmp
+PDF     = ../manual.pdf
+
+latexpdf: 
+    $(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(PDFBUILDDIR)/latex 
+    @echo "Running LaTeX files through pdflatex..." 
+    make -C $(PDFBUILDDIR)/latex all-pdf 
+    cp $(PDFBUILDDIR)/latex/*.pdf $(PDF) 
+>>>>>>> 326973819667aec49e1336fb0f350bfa151a3155
     @echo "pdflatex finished; see $(PDF)"
     
 # Put it first so that "make" without argument is like "make help".
