@@ -354,12 +354,18 @@ class fism:
         """
         Nmf= self.Nin_mf[var_index-1] if var_type == "in" else self.Nout_mf[var_index-1]
         mf_list = [0] *Nmf
-
+        print(self.Ninputs)
         if var_type =="in":
+
+            in_mfcsum= [0] * (self.Ninputs+1)
+            for i in range(1,self.Ninputs+1):
+                in_mfcsum[i]=in_mfcsum[i-1]+self.Nin_mf[i-1]
+            print(in_mfcsum)
+            idx=in_mfcsum[var_index-1]
             for i in range(0,Nmf):
-                mf_list[i]=[self.mfnames_in[i],mftypes[int(self.mfpari[i][0])],self.mfpari[i][0:-1]]
+                mf_list[i]=[self.mfnames_in[idx+i],mftypes[int(self.mfpari[idx+i][0])],self.mfpari[idx+i][0:-1]]
 
-
+     
         else:
             for i in range(0,Nmf):
                 mf_list[i]=[self.mfnames_out[i],mftypes[int(self.mfparo[i][0])],self.mfpari[i][0:-1]]
@@ -379,8 +385,8 @@ class fism:
         cols=rule.shape[-1]  
         
         if self.NRules ==0:
-           self.RuleList=rule
-           self.RuleWeights=np.array(weight)
+           self.RuleList=np.array([rule])
+           self.RuleWeights=np.array([weight])
            self.NRules=rows
         else:   
            self.RuleList =np.vstack((self.RuleList,np.array(rule).astype(int)))

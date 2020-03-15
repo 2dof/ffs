@@ -42,7 +42,10 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.mathjax',
+    #'rinoh.frontend.sphinx'
+    #'rst2pdf.pdfbuilder',                   #  BUDOWANIE PDF
 ]
+#pdf_documents = [('index', u'rst2pdf', u'Sample rst2pdf doc', u'LUKASZ'),]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -110,21 +113,21 @@ htmlhelp_basename = 'ffsdoc'
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
+    #The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
+     'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
-    # 'pointsize': '10pt',
+     'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
     #
-    # 'preamble': '',
+     'preamble': '',
 
     # Latex figure (float) alignment
     #
-    # 'figure_align': 'htbp',
+     'figure_align': 'htbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples

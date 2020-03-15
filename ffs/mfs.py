@@ -91,7 +91,7 @@ def gaussmf(xn,param):
         sigma=1
         
     tmp1=-(xn-c)**2
-    tmp2=2.0*sigma**2
+    tmp2=2.0*(sigma**2)
     
     return np.exp(tmp1/tmp2)
     
@@ -127,19 +127,17 @@ def gauss2mf(xn,param):
 
 
 def gbellmf(xn,param): # TODO description
-    """
-    Generalized bell-shaped membership function
-    retur value of Generalized bell-shaped function:
-    :math:`f(x,a,b,c)= gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)`.
-
-    :param xn: input value
-    :param param: [a,b,c]
-    :type xn: float
-    :type param: float
-    :return: value of Generalized bell-shaped
-    :rtype: float
-
-    """
+    """ 
+        Generalized bell-shaped membership function
+        retur value of Generalized bell-shaped function:
+        :math: `f(x,a,b,c) = gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)`.
+        :param xn:      input value,
+        :param param: [a,b,c],
+        :type xn:         float,
+        :type param:    float,
+        :return:           value of Generalized bell-shaped,
+        :rtype:            float,
+    """ 
     a = param[0]
     b = param[1]
     c = param[2]
@@ -202,26 +200,25 @@ def eval_mf(xn,params):
     :return:  value of mf an xn
     """
     mf_type=params[0]
-    
     y = 0.0
     
     if mf_type==0 :   # 'trimf'
         y=trimf(xn,params[1:])
 
-    elif mf_type == 1:  # trapmf
-        y = trapmf(xn, params[1:])
+    elif mf_type == 1:                         # trapmf
+        y = trapmf(xn, params[1:])        #
 
-    elif mf_type == 2:  # gaussmf
-        y = gaussmf(xn, params[1:])
+    elif mf_type == 2:                         # gaussmf
+        y = gaussmf(xn, params[1:])      #
 
-    elif mf_type == 3:  # gauss2mf
-        y = gauss2mf(xn, params[1:])
+    elif mf_type == 3:                         # gauss2mf
+        y = gauss2mf(xn, params[1:])    #
 
-    elif mf_type == 4:  # gbellmf
-        y = gbellmf(xn, params[1:])
+    elif mf_type == 4:                         # gbellmf
+        y = gbellmf(xn, params[1:])        #
 
-    elif mf_type == 5:  # sigmf
-        y = sigmf(xn, params[1:])
+    elif mf_type == 5:                         # sigmf
+        y = sigmf(xn, params[1:])          #
 
     elif mf_type == 6:  # singletonmf
         y = singletonmf(xn, params[1:])

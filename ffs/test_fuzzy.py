@@ -93,7 +93,7 @@ class TestFUZZY_SETS(unittest.TestCase):
         self.assertEqual(complement(0.3, 'sugeno'), 0.7)
 
     def test_defuzzy(self):
-       # print("test defuzzyfucation method")
+        print("test defuzzyfucation method")
         y=[0, 0.5, 1, 1, 0.5, 0]
 
         x1 = defuzzy(y, 'centroid')
@@ -111,6 +111,7 @@ class TestFUZZY(unittest.TestCase):
 
 
     def setUp(self):
+        print("setup")
         fis1 = fism()
         fis1.addvar('in', 'x1', [0., 3.0])
         fis1.addvar('in', 'x2', [0., 3.0])
@@ -128,7 +129,7 @@ class TestFUZZY(unittest.TestCase):
         fis1.addmf('out', 1, 'C2', 'trimf', [0, 1, 2, 0])
         fis1.addmf('out', 1, 'C3', 'trimf', [1, 2, 3, 0])
         self.fis1=fis1
-        pass
+     
 
     def test_addvar(self):
 
@@ -138,6 +139,6 @@ class TestFUZZY(unittest.TestCase):
 
 if __name__ == '__main__':
     print('test run')
-    unittest.main()
+    unittest.main(verbosity=2)
 
 #python -m unittest test_fuzzy.py

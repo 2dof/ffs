@@ -21,6 +21,14 @@ __email__ = "szydlowski.lu@gmial.com"
 __status__ = "Development"
 __version__ = "1.0.0.dev1"
 
+#from matplotlib.pylab import *
+#import matplotlib.pyplot as plt
+#plt.rcParams['lines.linewidth'] = 0.5
+#plt.rcParams['lines.markersize'] = 2
+#plt.rcParams["savefig.facecolor"]='white'
+#plt.rcParams["figure.facecolor"]='white'
+#plt.rcParams["axes.facecolor"]='white'
+#plt.ion()
 
 from mfs import *
 
@@ -200,7 +208,10 @@ def evaluate(fis,x):
     
     for rule in range (0,fis.NRules):
         for inp in range(0,fis.Ninputs):
-
+#            if fis.RuleList.ndim==1:
+#                idx=abs(fis.RuleList[inp])
+#                isgn=np.sign(fis.RuleList[inp])
+#            else:    
             idx=abs(fis.RuleList[rule,inp])
             isgn=np.sign(fis.RuleList[rule,inp])
 
@@ -247,7 +258,7 @@ def evaluate(fis,x):
 
             tmp3 = np.zeros((fis.Npts, 2))
             ranges=fis.varRange[fis.Ninputs+outp]
-            dx = np.abs(ranges[1]-ranges[0])/ fis.Npts
+            dx = np.abs(ranges[1]-ranges[0])/ float(fis.Npts)
 
             for rule in range (0,fis.NRules):
 
@@ -258,7 +269,7 @@ def evaluate(fis,x):
                     pt1 = idx + out_mfcsum[outp]-1
 
                     for i in range(0,fis.Npts):
-                        tmp3[i,1]=eval_mf(i*dx,fis.mfparo[pt1][:])
+                        tmp3[i,1]=eval_mf(ranges[0]+i*dx,fis.mfparo[pt1][:])
 
                     if isgn<0:
                         for i in range(0,fis.Npts):
@@ -280,7 +291,7 @@ def evaluate(fis,x):
                     for i in range(0,fis.Npts):
                         tmp3[i,0]=max(tmp3[i,0],tmp3[i,1])
 
-                elif  fis.Aggmethod == 'sum''sum':         #  sum
+                elif  fis.Aggmethod == 'sum':         #  sum
 
                     for i in range(0,fis.Npts):
                         tmp3[i,0]=tmp3[i,0]+tmp3[i,1]
@@ -294,8 +305,8 @@ def evaluate(fis,x):
                     for i in range(0,fis.Npts):
                         tmp3[i,0] = snorm(tmp3[i,0],tmp3[i,1],"prod")
 
-
-            y[outp] = dx*defuzzy(tmp3[:,0],fis.Defuzzymethod)-ranges[0]
+            
+            y[outp] = dx*defuzzy(tmp3[:,0],fis.Defuzzymethod)+ranges[0]
 
     elif fis.type == 'tsk':
         for outp in range(0, fis.Noutputs):

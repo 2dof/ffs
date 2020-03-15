@@ -6,7 +6,7 @@
 Welcome to ffs's documentation!
 ===============================
 
-Functionl fuzzy system 
+Functionl Fuzzy System 
 
 .. toctree::
    :maxdepth: 1
