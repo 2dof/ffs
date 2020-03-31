@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath('C:/Users/user/PycharmProjects/ffs/ffs'))
 # -- Project information -----------------------------------------------------
 
 project = u'ffs'
-copyright = u'2018, Lukasz Szydlowski'
+copyright = u'2020, Lukasz Szydlowski'
 author = u'Lukasz'
 
 # The short X.Y version
@@ -41,9 +41,9 @@ release = u'alpha'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
-    'sphinx.ext.mathjax',
-    #'rinoh.frontend.sphinx'
-    #'rst2pdf.pdfbuilder',                   #  BUDOWANIE PDF
+    'sphinx.ext.mathjax'
+#    'rinoh.frontend.sphinx',
+#    'rst2pdf.pdfbuilder'                   #  BUDOWANIE PDF
 ]
 #pdf_documents = [('index', u'rst2pdf', u'Sample rst2pdf doc', u'LUKASZ'),]
 
@@ -148,6 +148,10 @@ man_pages = [
      [author], 1)
 ]
 
+#rinoh_documents = [('index',            # top-level file (index.rst)
+#                    'ffs',           # output (target.pdf)
+#                    'ffs docs',   # document title
+#                    'Lukasz Szydlowski')]   # document author
 
 # -- Options for Texinfo output ----------------------------------------------
 

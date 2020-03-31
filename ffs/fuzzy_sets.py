@@ -21,14 +21,16 @@ __email__ = "szydlowski.lu@gmial.com"
 __status__ = "Development"
 __version__ = "1.0.0.dev1"
 
-#from matplotlib.pylab import *
-#import matplotlib.pyplot as plt
-#plt.rcParams['lines.linewidth'] = 0.5
-#plt.rcParams['lines.markersize'] = 2
-#plt.rcParams["savefig.facecolor"]='white'
-#plt.rcParams["figure.facecolor"]='white'
-#plt.rcParams["axes.facecolor"]='white'
-#plt.ion()
+
+import numpy as np
+from matplotlib.pylab import *
+import matplotlib.pyplot as plt
+plt.rcParams['lines.linewidth'] = 0.5
+plt.rcParams['lines.markersize'] = 2
+plt.rcParams["savefig.facecolor"]='white'
+plt.rcParams["figure.facecolor"]='white'
+plt.rcParams["axes.facecolor"]='white'
+plt.ion()
 
 from mfs import *
 
@@ -125,20 +127,27 @@ def defuzzy(y, method):
     """
     tmp = 0
     out = 0
-
+   # figure(3); plot(y), grid(True)
     if method == 'centroid':  # centroid
         tmp = np.sum(y)
-        #print(y)
+        
+        print(tmp)
         for i in range(0, len(y)):
             out = out + i * y[i]
         
         #print([method,tmp])
-        out = out / float(tmp)
+        if out ==0:
+            out=0
+        else:
+            out = out / float(tmp)
 
     elif method == 'mom':  # MEAN OF MAXIMUM (MOM)
         out = 0
         tmp = y[0]
         tmp1 = 1.
+        #print(y)
+       #
+        
         for i in range(1, len(y)):
             if (y[i] == tmp):
                 out += i
@@ -146,7 +155,8 @@ def defuzzy(y, method):
             elif y[i] > tmp:
                 out = i
                 tmp = y[i]
-
+                tmp1 = 1.
+       # print([out, tmp1])
         out = out / tmp1
 
     elif method == 'som':  # SHORTEST OF MAXIMUM (SOM)
@@ -160,7 +170,7 @@ def defuzzy(y, method):
             elif y[i] > tmp:
                 tmp = y[i]
                 out = i
-
+                
     elif method == 'lom':  # LARGEST OF MAXIMUM (LOM)
         out = 0
         tmp = y[0]
@@ -270,7 +280,7 @@ def evaluate(fis,x):
 
                     for i in range(0,fis.Npts):
                         tmp3[i,1]=eval_mf(ranges[0]+i*dx,fis.mfparo[pt1][:])
-
+                        
                     if isgn<0:
                         for i in range(0,fis.Npts):
                             tmp3[i,1]=complement(tmp3[i,1],"one")
@@ -305,7 +315,8 @@ def evaluate(fis,x):
                     for i in range(0,fis.Npts):
                         tmp3[i,0] = snorm(tmp3[i,0],tmp3[i,1],"prod")
 
-            
+            #figure(4); plot(tmp3[:,0]); grid(True)
+           # print([dx,ranges[0]])
             y[outp] = dx*defuzzy(tmp3[:,0],fis.Defuzzymethod)+ranges[0]
 
     elif fis.type == 'tsk':
@@ -352,3 +363,5 @@ def getsurf(fis,Npts,in1=1,in2=2,out=1):
     Y = np.array(range(0, Npts + 1)) * dx2
 
     return X,Y,Z
+
+

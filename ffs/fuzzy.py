@@ -280,7 +280,7 @@ class fism:
                
             else:
                self.mfpari=np.delete(self.mfpari, (idx), axis=0)
-               self.mfnames_int=np.delete(self.mfnames_in,idx, axis=0)
+               self.mfnames_in=np.delete(self.mfnames_in,idx, axis=0)
                self.Nin_mf[var_index-1]-=1
             
         elif var_type =="out":
