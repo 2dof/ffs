@@ -7,7 +7,7 @@ Mamdani and Sugeno inference.
 I use this simple library for R&D fuzzy control and process simulation based on Python.
 I'm used to working with fuzzy tolboxes from Matlab and Scilab(sciFLT) so i tried to keep similar convention.
 
-API docs: 'https://2dof.github.io/ffs/ <https://2dof.github.io/ffs/>'_ 
+API docs: https://2dof.github.io/ffs/ 
 
 Project Summary
 ===============
