@@ -175,15 +175,11 @@ class TestFUZZY(unittest.TestCase):
         
     def test_add_del_mf(self):
         print("test add / del mf ")   
-        #print(self.fis1.Nin_mf)
         #'trimf','trapmf','gaussmf','gauss2mf','gbellmf','sigmf','singleton'
-        
         #  Add mf 
         self.fis1.addmf('in', 1, 'A4', 'trimf', [0,0.5,1,0])
-        
         self.assertEqual(self.fis1.Nin_mf,[4,3])
-        self.assertListEqual(list(self.fis1.mfnames_in),['A1', 'A2', 'A3', 'B1', 'B2', 'B3'])
-        
+        self.assertListEqual(list(self.fis1.mfnames_in),['A1', 'A2', 'A3','A4', 'B1', 'B2', 'B3'])
         mf = self.fis1.getmf('in',1)[-1]
         #print(mf)
         self.assertEqual(mf[0],'A4')
@@ -192,9 +188,25 @@ class TestFUZZY(unittest.TestCase):
         #print(self.fis1.getmf('in',1))
         # delete mf 
         self.fis1.delmf('in',1,4)
-        print(self.fis1.getmf('in',1))
+        #print(self.fis1.getmf('in',1))
         self.assertListEqual(list(self.fis1.mfnames_in),['A1', 'A2', 'A3', 'B1', 'B2', 'B3'])
     
+    def test_add_del_rule(self):
+        
+        self.assertEqual(self.fis1.NRules,3)
+        #print(self.fis1.RuleList[0])
+        self.assertListEqual(list(self.fis1.RuleList[0]),[1,1,1,1,])
+        self.assertListEqual(list(self.fis1.RuleWeights),[1.,1.,1.])
+        
+        self.fis1.addrule([1,2,3,0],.5)  # if A1 or B2 then C3 , weiht 0.5 
+        self.assertEqual(self.fis1.NRules,4)
+        self.assertListEqual(list(self.fis1.RuleList[3]),[1,2,3,0])
+        self.assertEqual(self.fis1.RuleWeights[3],0.5)
+        
+        
+        
+        
+        
         
 if __name__ == '__main__':
     print('test run')

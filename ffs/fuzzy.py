@@ -340,7 +340,7 @@ class fism:
             param = np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
             self.mfparo[idx:] = param
         
-        print('edit mf ')
+        #print('edit mf ')
 
     def getmf(self, var_type,var_index):
         """
@@ -354,13 +354,13 @@ class fism:
         """
         Nmf= self.Nin_mf[var_index-1] if var_type == "in" else self.Nout_mf[var_index-1]
         mf_list = [0] *Nmf
-        print(self.Ninputs)
+        #print(self.Ninputs)
         if var_type =="in":
 
             in_mfcsum= [0] * (self.Ninputs+1)
             for i in range(1,self.Ninputs+1):
                 in_mfcsum[i]=in_mfcsum[i-1]+self.Nin_mf[i-1]
-            print(in_mfcsum)
+            #print(in_mfcsum)
             idx=in_mfcsum[var_index-1]
             for i in range(0,Nmf):
                 mf_list[i]=[self.mfnames_in[idx+i],mftypes[int(self.mfpari[idx+i][0])],self.mfpari[idx+i][0:-1]]

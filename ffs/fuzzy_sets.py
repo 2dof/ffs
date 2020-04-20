@@ -131,7 +131,7 @@ def defuzzy(y, method):
     if method == 'centroid':  # centroid
         tmp = np.sum(y)
         
-        print(tmp)
+        #print(tmp)
         for i in range(0, len(y)):
             out = out + i * y[i]
         
@@ -352,15 +352,15 @@ def getsurf(fis,Npts,in1=1,in2=2,out=1):
     :param out: No of outpt
     :return: X,Y,Z - x,y cooordinates and z: data surface value
     """
-    dx1 = (fis.varRange[in1-1][1]-fis.varRange[in1-1][0])/float(Npts)
-    dx2 = (fis.varRange[in2-1][1]-fis.varRange[in2-1][0])/float(Npts)
+    dx1 = np.abs(fis.varRange[in1-1][1]-fis.varRange[in1-1][0])/float(Npts)
+    dx2 = np.abs(fis.varRange[in2-1][1]-fis.varRange[in2-1][0])/float(Npts)
     Z = np.zeros((Npts+1,Npts+1))
     for i in range(0,Npts+1):
         for j in range(0,Npts+1):
-            Z[i, j]=evaluate(fis,[dx1*i,dx2*j])[out-1]
+            Z[i, j]=evaluate(fis,[dx1*i+fis.varRange[in1-1][0],dx2*j+fis.varRange[in2-1][0]])[out-1]
 
-    X = np.array(range(0, Npts + 1)) * dx1
-    Y = np.array(range(0, Npts + 1)) * dx2
+    X = np.array(range(0, Npts + 1)) * dx1+fis.varRange[in1-1][0]
+    Y = np.array(range(0, Npts + 1)) * dx2+fis.varRange[in2-1][0]
 
     return X,Y,Z
 

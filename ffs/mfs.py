@@ -99,7 +99,8 @@ def gaussmf(xn,param):
 def gauss2mf(xn,param):
     """
     Compute nonsymmetric gaussian function membership
-    return value  of nonsymmetric Gaussian function depends of param=[σ1, c1,σ2, c2]
+    
+    return value  of nonsymmetric Gaussian function depends of param=[σ1, c1, σ2, c2]
 
     :param xn: input sample
     :param param: [sigma1, const.1,sigma 2, const.2]
@@ -127,7 +128,7 @@ def gauss2mf(xn,param):
     return np.exp(tmp1/tmp2)
 
 
-def gbellmf(xn,param): # TODO description
+def gbellmf(xn,param):  
     """ 
         Generalized bell-shaped membership function
         retur value of Generalized bell-shaped function:
@@ -150,7 +151,7 @@ def gbellmf(xn,param): # TODO description
     return 1/(1+tmp2)
     
 
-def sigmf(xn,param): # TODO description
+def sigmf(xn,param): 
     """
     Sigmoidal membership function
 
