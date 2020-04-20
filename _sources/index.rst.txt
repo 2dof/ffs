@@ -6,7 +6,15 @@
 Welcome to ffs's documentation!
 ===============================
 
-Functionl Fuzzy System 
+Functionl Fuzzy System is a simple library dedicated to Fuzzy System Modeling and
+simulation.
+Main class: fism.py implement "Matlab like"  fuzzy inference system  for 
+Mamdani type and TSK (only linear) type fuzzy system. 
+
+I'm planning to add other Fuzzy Inference sytems and features: 
+- Array based Rule Table Fuzzy Systems 
+- Self organisation, adaptation alghorithms   
+
 
 .. toctree::
    :maxdepth: 1
