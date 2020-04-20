@@ -19,13 +19,15 @@ Actual status
 
 Done:
 +++++
-* Implemented basic fuzzy inference engine and fuzzy class structure for only AND,and NOT logic in user-defined rules
+* Implemented basic fuzzy inference engine and fuzzy class structure for only 'AND' or 'OR' logic in user-defined rules
+* TSK for linear inference 
 
 To Do:
 ++++++
-* Implementet supprot for OR logic user defined rules, and linguistic Rules definition
-* support for normalized parameters and values (integer based computation)
 * Docs, Examples
+* Add siplified Fuzzy models ( Rule Table Arrays, Lookup Tables) for Fuzzy Control modeling and simulation 
+* Add self organizing, adataptaion mechanisms 
+* Implementet supprot for 'AND' and 'OR' logic user defined rules, and linguistic Rules definition
 * GUI for building fuzzy inference systems and viewing and analyzing result
 * Code optimization and refractoring (port to Cython)
-
+* support for normalized parameters and values (integer based computation)

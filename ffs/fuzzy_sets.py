@@ -23,14 +23,15 @@ __version__ = "1.0.0.dev1"
 
 
 import numpy as np
-from matplotlib.pylab import *
-import matplotlib.pyplot as plt
-plt.rcParams['lines.linewidth'] = 0.5
-plt.rcParams['lines.markersize'] = 2
-plt.rcParams["savefig.facecolor"]='white'
-plt.rcParams["figure.facecolor"]='white'
-plt.rcParams["axes.facecolor"]='white'
-plt.ion()
+#from matplotlib.pylab import *
+#import matplotlib.pyplot as plt
+#plt.rcParams['lines.linewidth'] = 0.5
+#plt.rcParams['lines.markersize'] = 2
+#plt.rcParams["savefig.facecolor"]='white'
+#plt.rcParams["figure.facecolor"]='white'
+#plt.rcParams["axes.facecolor"]='white'
+#plt.ion()
+
 
 from mfs import *
 
@@ -113,7 +114,7 @@ def complement(x,type):
 def defuzzy(y, method):
     """
     Defuzzify membership function with defined method.
-    'centroid'  -CENTROID
+    'centroid'  -CENTROID                 
     'mom'        MEAN OF MAXIMUM (MOM)
     'som'        SHORTEST OF MAXIMUM (SOM)
     'lom'        LARGEST OF MAXIMUM (LOM)
@@ -228,8 +229,11 @@ def evaluate(fis,x):
             if (idx > 0):
                 pt1 = idx + in_mfcsum[inp]-1
 #                print( in_mfcsum)
-#                print([idx,inp,pt1,'--',fis.mfpari[pt1][:]]) 
-                tmp[inp] = eval_mf(x[inp],fis.mfpari[pt1][:])
+                if ((x[inp]< fis.varRange[inp][0]) | ((x[inp]> fis.varRange[inp][1]))):                 # NEW - add to module 
+                    tmp[inp]= 1.0    
+                    print(inp+1,' out of range ')
+                else:    
+                    tmp[inp] = eval_mf(x[inp],fis.mfpari[pt1][:])               # caculate mfs value
                 
                 if (isgn <0):      # not 
                      tmp[inp] = complement(tmp[inp],"one")
