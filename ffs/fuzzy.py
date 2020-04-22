@@ -50,7 +50,7 @@ class fism:
     **varRange**        [float,float]    store of variable physical range
     **ORmethod**        string           default:'max' other: 'prod' 'eprod
     **ANDmethod**       string           default 'min' , other: ,'prod' , eprod'
-    **Implmethod**      string           Implication method, default: 'min' . other:'tnorm eprod'
+    **Implmethod**      string           Implication method, default: 'min' . other:'tnorm', 'eprod'
     **Aggmethod**       string           Aggregation Method, default: 'max'
     **Defuzzymethod**   string           Defuzzyfication Method, defalult: 'centroid'
     **RuleList**        2D int array     store rules (Array Nrules x(Ninputs+Noutputs+1
@@ -62,6 +62,9 @@ class fism:
     **Nin_mf**          Int list         list, Numbenr of inputs mf  [N_mf in1, N_mf in2...]
     **Nout_mf**         Int list         list, Numbenr of inputs mf  [N_mf out1, N_mf out2...]
     **Npts**            Int              No of points resolution for defuzzyfication process
+    
+    **outOfRange**         Int            = 1  when any of input is out of Range
+    **NoRuleFired**        int            = 1 when no rule fired 
     =================   ==============   ========================================================
 
     **Example initialization**
@@ -93,7 +96,8 @@ class fism:
         self.Noutputs   =0                  # (int)
         self.varName = []  # list of variablee names
         self.varRange = []  # list of variables range
-
+        self.outOfRange=0       # Oit of range flag
+        self.NoRuleFired = 0
         self.Nin_mf = [0]*self.Ninputs
         self.Nout_mf = [0] * self.Noutputs
 

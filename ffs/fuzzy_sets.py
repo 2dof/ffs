@@ -23,6 +23,7 @@ __version__ = "1.0.0.dev1"
 
 
 import numpy as np
+from mfs import *
 #from matplotlib.pylab import *
 #import matplotlib.pyplot as plt
 #plt.rcParams['lines.linewidth'] = 0.5
@@ -216,6 +217,7 @@ def evaluate(fis,x):
         
     tmp=[0]*fis.Ninputs 
     tmp2=[0]*fis.NRules
+    fis.outOfRange = 0
     
     for rule in range (0,fis.NRules):
         for inp in range(0,fis.Ninputs):
@@ -230,19 +232,20 @@ def evaluate(fis,x):
                 pt1 = idx + in_mfcsum[inp]-1
 #                print( in_mfcsum)
                 if ((x[inp]< fis.varRange[inp][0]) | ((x[inp]> fis.varRange[inp][1]))):                 # NEW - add to module 
-                    tmp[inp]= 1.0    
-                    print(inp+1,' out of range ')
+                    #tmp[inp]= 1.0    
+                    #print(rule, inp+1,' out of range ')
+                    fis.outOfRange = 1
                 else:    
                     tmp[inp] = eval_mf(x[inp],fis.mfpari[pt1][:])               # caculate mfs value
                 
                 if (isgn <0):      # not 
-                     tmp[inp] = complement(tmp[inp],"one")
+                    tmp[inp] = complement(tmp[inp],"one")
                      
             elif fis.RuleList[rule,fis.Ninputs+fis.Noutputs]==0: #   OR
                 tmp[inp] =0
             else:                   # =1 : AND 
                 tmp[inp] =1
-    
+                 
         # snomr/ T norm
         if fis.RuleList[rule,fis.Ninputs+fis.Noutputs]==0:
             y=tmp[0]
@@ -262,14 +265,19 @@ def evaluate(fis,x):
     # defuzzyfication-------------------------
     y = [0]*fis.Noutputs
     out_mfcsum = [0] * (fis.Noutputs + 1)
-
+ 
     for i in range(1, fis.Noutputs + 1):
         out_mfcsum[i] = out_mfcsum[i - 1] + fis.Nout_mf[i - 1]
+    
+    fis.NoRuleFired = 0    
+    if np.sum(tmp2)==0:
+        #print('rule not fired')
+        fis.NoRuleFired = 1
    # - mamdani
     if fis.type=='mamdani':
-
+        
         for outp in range(0,fis.Noutputs):
-
+            
             tmp3 = np.zeros((fis.Npts, 2))
             ranges=fis.varRange[fis.Ninputs+outp]
             dx = np.abs(ranges[1]-ranges[0])/ float(fis.Npts)
@@ -319,8 +327,8 @@ def evaluate(fis,x):
                     for i in range(0,fis.Npts):
                         tmp3[i,0] = snorm(tmp3[i,0],tmp3[i,1],"prod")
 
-            #figure(4); plot(tmp3[:,0]); grid(True)
-           # print([dx,ranges[0]])
+#            figure(4); plot(tmp3[:,0]); grid(True)
+#            print(tmp2)
             y[outp] = dx*defuzzy(tmp3[:,0],fis.Defuzzymethod)+ranges[0]
 
     elif fis.type == 'tsk':
