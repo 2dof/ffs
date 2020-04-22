@@ -31,6 +31,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="project.html" title="Project Summary"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -45,8 +48,8 @@
   <ul>
 <li><a class="reference internal" href="#">API Documentation</a><ul>
 <li><a class="reference internal" href="#fuzzy-class">Fuzzy class</a></li>
-<li><a class="reference internal" href="#memebership-functions">Memebership Functions</a></li>
-<li><a class="reference internal" href="#fuzzy-sets">Fuzzy sets</a></li>
+<li><a class="reference internal" href="#module-mfs">Memebership Functions</a></li>
+<li><a class="reference internal" href="#module-fuzzy_sets">Fuzzy sets</a></li>
 </ul>
 </li>
 </ul>
@@ -96,14 +99,632 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="fuzzy-class">
+<span class="target" id="module-fuzzy"></span><div class="section" id="fuzzy-class">
 <h2>Fuzzy class<a class="headerlink" href="#fuzzy-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fuzzy.fism">
+<em class="property">class </em><code class="descclassname">fuzzy.</code><code class="descname">fism</code><span class="sig-paren">(</span><em>type='mamdani'</em>, <em>Ninputs=0</em>, <em>Noutputs=0</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class object storing settings and configuration parameters (data attributes)
+for Fuzzy Mamdani or Tagaki-Sugeno type Fuzzy system.</p>
+<p>By default initialization mamdani type fuzzy is set with settings:</p>
+<p><strong>ANDmethod:</strong> Tnorm ‘min’</p>
+<p><strong>ORmethod:</strong>  Snorm ‘max’</p>
+<p><strong>Implication method:</strong> Tnorm ‘min’</p>
+<p><strong>Aggregation method:</strong>  ‘max’</p>
+<p><strong>Deffuzyfication method:</strong> ‘centroid’</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">fism in ver.1.0.0 is only fuzzy structure container. Fuzzy Inference Process is implemented by evaluate(fis,x) from fuzzy_sets.py.</p>
 </div>
-<div class="section" id="memebership-functions">
-<h2>Memebership Functions<a class="headerlink" href="#memebership-functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="16%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Atributes</th>
+<th class="head">format</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>type</strong></td>
+<td>string</td>
+<td>=’mamdani’ or ‘tsk’ : type of fuzzy system</td>
+</tr>
+<tr class="row-odd"><td><strong>Ninputs</strong></td>
+<td>Int</td>
+<td>Number of inputs</td>
+</tr>
+<tr class="row-even"><td><strong>Noutputs</strong></td>
+<td>Int</td>
+<td>Number of outputs</td>
+</tr>
+<tr class="row-odd"><td><strong>varName</strong></td>
+<td>string</td>
+<td>list, store of variable names</td>
+</tr>
+<tr class="row-even"><td><strong>varRange</strong></td>
+<td>[float,float]</td>
+<td>store of variable physical range</td>
+</tr>
+<tr class="row-odd"><td><strong>ORmethod</strong></td>
+<td>string</td>
+<td>default:’max’ other: ‘prod’ ‘eprod</td>
+</tr>
+<tr class="row-even"><td><strong>ANDmethod</strong></td>
+<td>string</td>
+<td>default ‘min’ , other: ,’prod’ , eprod’</td>
+</tr>
+<tr class="row-odd"><td><strong>Implmethod</strong></td>
+<td>string</td>
+<td>Implication method, default: ‘min’ . other:’tnorm’, ‘eprod’</td>
+</tr>
+<tr class="row-even"><td><strong>Aggmethod</strong></td>
+<td>string</td>
+<td>Aggregation Method, default: ‘max’</td>
+</tr>
+<tr class="row-odd"><td><strong>Defuzzymethod</strong></td>
+<td>string</td>
+<td>Defuzzyfication Method, defalult: ‘centroid’</td>
+</tr>
+<tr class="row-even"><td><strong>RuleList</strong></td>
+<td>2D int array</td>
+<td>store rules (Array Nrules x(Ninputs+Noutputs+1</td>
+</tr>
+<tr class="row-odd"><td><strong>RuleWeights</strong></td>
+<td>1D float array</td>
+<td>list of Rule’s weights</td>
+</tr>
+<tr class="row-even"><td><strong>mfnames_in</strong></td>
+<td>string list</td>
+<td>list, names of input’s mf</td>
+</tr>
+<tr class="row-odd"><td><strong>mfnames_out</strong></td>
+<td>string</td>
+<td>list, names of output’s mf</td>
+</tr>
+<tr class="row-even"><td><strong>mfpari</strong></td>
+<td>2D float array</td>
+<td>array list of inputs mf types and parameters</td>
+</tr>
+<tr class="row-odd"><td><strong>mfparo</strong></td>
+<td>2D float array</td>
+<td>array list of outrputs mf types and parameters</td>
+</tr>
+<tr class="row-even"><td><strong>Nin_mf</strong></td>
+<td>Int list</td>
+<td>list, Numbenr of inputs mf  [N_mf in1, N_mf in2…]</td>
+</tr>
+<tr class="row-odd"><td><strong>Nout_mf</strong></td>
+<td>Int list</td>
+<td>list, Numbenr of inputs mf  [N_mf out1, N_mf out2…]</td>
+</tr>
+<tr class="row-even"><td><strong>Npts</strong></td>
+<td>Int</td>
+<td>No of points resolution for defuzzyfication process</td>
+</tr>
+<tr class="row-odd"><td><strong>outOfRange</strong></td>
+<td>Int</td>
+<td>= 1  when any of input is out of Range</td>
+</tr>
+<tr class="row-even"><td><strong>NoRuleFired</strong></td>
+<td>int</td>
+<td>= 1 when no rule fired</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example initialization</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fuzzy</span>  <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fuzzy_sets</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">fis1</span> <span class="o">=</span> <span class="n">fism</span><span class="p">()</span>               <span class="c1"># empty mamdani fuzzy structure</span>
+<span class="n">fis2</span> <span class="o">=</span> <span class="n">fism</span><span class="p">(</span><span class="s1">&#39;mamdani&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 2 input, 1 output mamdani fuzzy structure</span>
+</pre></div>
 </div>
-<div class="section" id="fuzzy-sets">
-<h2>Fuzzy sets<a class="headerlink" href="#fuzzy-sets" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="fuzzy.fism.addmf">
+<code class="descname">addmf</code><span class="sig-paren">(</span><em>var_type</em>, <em>var_index</em>, <em>namemf</em>, <em>typemf</em>, <em>parammf</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism.addmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add membership function (mf) to fuzzy structure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>var_type</strong> (<em>string</em>) – “in” or “out” type variable</li>
+<li><strong>var_index</strong> (<em>int</em>) – Number of added mf</li>
+<li><strong>namemf</strong> (<em>string</em>) – name of membership function</li>
+<li><strong>typemf</strong> (<em>string</em>) – type of mf: ‘trimf’,’trapmf’,’gaussmf’,’gauss2mf’,’gbellmf’,’sigmf’,’singleton’</li>
+<li><strong>parammf</strong> (<em>string</em>) – [param 1, param2, param 3, param 4]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuzzy.fism.addrule">
+<code class="descname">addrule</code><span class="sig-paren">(</span><em>rule</em>, <em>weight</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism.addrule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add rule to fuzzy structure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rule</strong> (<em>list of Int</em>) – rule</li>
+<li><strong>weight</strong> (<em>double</em>) – weighting parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuzzy.fism.addvar">
+<code class="descname">addvar</code><span class="sig-paren">(</span><em>type</em>, <em>name</em>, <em>range</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism.addvar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add variable (input or output) to the fuzzy system</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>type</strong> (<em>string</em>) – ‘in’ or ‘out’</li>
+<li><strong>name</strong> (<em>string</em>) – name of variable</li>
+<li><strong>range</strong> – [min,max] range value of variable</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fis1</span><span class="o">.</span><span class="n">addvar</span><span class="p">(</span><span class="s1">&#39;in&#39;</span><span class="p">,</span><span class="s1">&#39;x1&#39;</span><span class="p">,[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.0</span><span class="p">])</span>
+<span class="n">fis1</span><span class="o">.</span><span class="n">addvar</span><span class="p">(</span><span class="s1">&#39;in&#39;</span><span class="p">,</span><span class="s1">&#39;x2&#39;</span><span class="p">,[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.0</span><span class="p">])</span>
+<span class="n">fis1</span><span class="o">.</span><span class="n">addvar</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span><span class="s1">&#39;y1&#39;</span><span class="p">,[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">3.0</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuzzy.fism.delmf">
+<code class="descname">delmf</code><span class="sig-paren">(</span><em>var_type</em>, <em>var_index</em>, <em>mf_index</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism.delmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete membership function from fuzzy system</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>var_type</strong> – variable type: input(“in”) or output(“out”)</li>
+<li><strong>var_index</strong> (<em>Int</em>) – No. of variable</li>
+<li><strong>mf_index</strong> (<em>Int</em>) – No. of mf</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuzzy.fism.delrule">
+<code class="descname">delrule</code><span class="sig-paren">(</span><em>ruleNo</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism.delrule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete rule from fuzzy structure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ruleNo</strong> (<em>Int</em>) – Rule’s number</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuzzy.fism.delvar">
+<code class="descname">delvar</code><span class="sig-paren">(</span><em>var_type</em>, <em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism.delvar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete variable from fism structure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>var_type</strong> (<em>string</em>) – “in” or “out” type variable</li>
+<li><strong>idx</strong> (<em>Int</em>) – No of variable</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuzzy.fism.getmf">
+<code class="descname">getmf</code><span class="sig-paren">(</span><em>var_type</em>, <em>var_index</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism.getmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of membership function of input or output</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>var_type</strong> (<em>string</em>) – variable type: ‘in’ or ‘out’</li>
+<li><strong>var_index</strong> (<em>Int</em>) – index of variable 1…</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">mf list ie mf_list[i]=[name_i,type, params], i=0..Nmf-1</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fuzzy.fism.setmf">
+<code class="descname">setmf</code><span class="sig-paren">(</span><em>var_type</em>, <em>var_index</em>, <em>mf_index</em>, <em>typemf</em>, <em>parammf</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy.fism.setmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set new parameters for members ship function (mf) for input/output</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>var_type</strong> (<em>string</em>) – variable type: input(“in”) or output(“out”)</li>
+<li><strong>var_index</strong> (<em>Int</em>) – index of variable</li>
+<li><strong>mf_idx</strong> (<em>Int</em>) – No of mf function</li>
+<li><strong>typemf</strong> (<em>string</em>) – type of mf</li>
+<li><strong>parammf</strong> (<em>list of doubles</em>) – list [1x4] of mf parameters</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mfs">
+<span id="memebership-functions"></span><h2>Memebership Functions<a class="headerlink" href="#module-mfs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="mfs.eval_mf">
+<code class="descclassname">mfs.</code><code class="descname">eval_mf</code><span class="sig-paren">(</span><em>xn</em>, <em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#mfs.eval_mf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return value of mf function for input xn.
+type, and parameters of mf stored in params vector where:
+params=[mf code, mf params] :
+mf code: 0=’trimf’,1=’trapmf’,3=’gaussmf’,4=’gauss2mf’,5=’gbellmf’,6=’sigmf’,7=’singleton’]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xn</strong> (<em>float</em>) – input value</li>
+<li><strong>params</strong> (<em>vector</em>) – [mf code, mf params]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">value of mf an xn</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mfs.gauss2mf">
+<code class="descclassname">mfs.</code><code class="descname">gauss2mf</code><span class="sig-paren">(</span><em>xn</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mfs.gauss2mf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute nonsymmetric gaussian function membership
+return value  of nonsymmetric Gaussian function depends of param=[sigma_1, c1, sigma_2, c2]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xn</strong> (<em>float</em>) – input sample</li>
+<li><strong>param</strong> (<em>float</em>) – [sigma1, const.1,sigma 2, const.2]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">value of nonsymmetric Gaussian function</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mfs.gaussmf">
+<code class="descclassname">mfs.</code><code class="descname">gaussmf</code><span class="sig-paren">(</span><em>xn</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mfs.gaussmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute gaussian function membership
+return value  of symmetric Gaussian function
+<span class="math notranslate">\(gaussmf(x,[\sigma,c])= e^{\frac{-(x-c)^2}{2\sigma^2}}\)</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xn</strong> (<em>float</em>) – input sample</li>
+<li><strong>param</strong> (<em>float</em>) – [1x2] vector  = [sigma value, expected value]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">return value  of symmetric Gaussian function</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mfs.gbellmf">
+<code class="descclassname">mfs.</code><code class="descname">gbellmf</code><span class="sig-paren">(</span><em>xn</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mfs.gbellmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generalized bell-shaped membership function
+retur value of Generalized bell-shaped function:
+:math: ‘f(x,a,b,c) = gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)’ 
+:param xn:      input value,
+:param param: [a,b,c],
+:type xn:         float,
+:type param:    float,
+:return:           value of Generalized bell-shaped,
+:rtype:            float,</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mfs.sigmf">
+<code class="descclassname">mfs.</code><code class="descname">sigmf</code><span class="sig-paren">(</span><em>xn</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mfs.sigmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sigmoidal membership function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Math:</th><td class="field-body"><p class="first">‘f(x,[a,c]) = sigmf[x,[a,c]] = 1/(1+exp(-a(x−c)))’</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xn</strong> (<em>float</em>) – input value</li>
+<li><strong>param</strong> (<em>float</em>) – =[a,c]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">value of sigmoidal function</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mfs.singletonmf">
+<code class="descclassname">mfs.</code><code class="descname">singletonmf</code><span class="sig-paren">(</span><em>xn</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mfs.singletonmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>singleton function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xn</strong> – input value</li>
+<li><strong>param</strong> – [x0]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mfs.trapmf">
+<code class="descclassname">mfs.</code><code class="descname">trapmf</code><span class="sig-paren">(</span><em>xn</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mfs.trapmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trapezoidal membership function
+compute value of trapezoidal shape function.
+trapezoid is described by parameters: <span class="math notranslate">\(a&lt;=b &lt;=c &lt;= d\)</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xn</strong> (<em>float</em>) – input value</li>
+<li><strong>param</strong> (<em>float</em>) – ([1x4] vector) Trapezoid parameters: param=[a,b,c,d]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">value of Trapezoid mf</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mfs.trimf">
+<code class="descclassname">mfs.</code><code class="descname">trimf</code><span class="sig-paren">(</span><em>xn</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mfs.trimf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute value of triangular membership function
+<span class="math notranslate">\(f(x_n,a,b,c)=max(min((x-a)/(b-a),(c-x)/(c-b)),0)\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xn</strong> (<em>float</em>) – input value</li>
+<li><strong>param</strong> (<em>float</em>) – [1x3] vector: param[0]=a,param[1]=b,param[2]=c</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">value of triangular mf</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fuzzy_sets">
+<span id="fuzzy-sets"></span><h2>Fuzzy sets<a class="headerlink" href="#module-fuzzy_sets" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fuzzy_sets.complement">
+<code class="descclassname">fuzzy_sets.</code><code class="descname">complement</code><span class="sig-paren">(</span><em>x</em>, <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy_sets.complement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute complement of x according to “type” method:
+“one” - classic complement, “sugeno” - sugeno complement</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>float</em>) – iput value</li>
+<li><strong>type</strong> – “one” or “sugeno” type complement</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">complement of input x</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fuzzy_sets.defuzzy">
+<code class="descclassname">fuzzy_sets.</code><code class="descname">defuzzy</code><span class="sig-paren">(</span><em>y</em>, <em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy_sets.defuzzy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defuzzify membership function with defined method.
+‘centroid’  -CENTROID                 
+‘mom’        MEAN OF MAXIMUM (MOM)
+‘som’        SHORTEST OF MAXIMUM (SOM)
+‘lom’        LARGEST OF MAXIMUM (LOM)
+‘bisector’   BISECTOR</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>folat</em><em>[</em><em>]</em>) – </li>
+<li><strong>method</strong> (<em>String</em>) – defuzzy method: ‘centroid’,’mom’,’som’,’lom’,’bisector</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fuzzy_sets.evaluate">
+<code class="descclassname">fuzzy_sets.</code><code class="descname">evaluate</code><span class="sig-paren">(</span><em>fis</em>, <em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy_sets.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute fuzzy output of fis system for inputs x=[x1,x2…]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fis</strong> (<em>fism object</em>) – fuzzy structure (fism class) of fuzzy system</li>
+<li><strong>x</strong> (<em>float</em><em>[</em><em>]</em>) – input vector data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">fuzzy out</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fuzzy_sets.getsurf">
+<code class="descclassname">fuzzy_sets.</code><code class="descname">getsurf</code><span class="sig-paren">(</span><em>fis</em>, <em>Npts</em>, <em>in1=1</em>, <em>in2=2</em>, <em>out=1</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy_sets.getsurf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate fuzzy system surface</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fis</strong> – fis structure</li>
+<li><strong>Npts</strong> – No of points</li>
+<li><strong>in1</strong> – No of input 1</li>
+<li><strong>in2</strong> – No of input 2</li>
+<li><strong>out</strong> – No of outpt</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">X,Y,Z - x,y cooordinates and z: data surface value</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fuzzy_sets.snorm">
+<code class="descclassname">fuzzy_sets.</code><code class="descname">snorm</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>norm_type</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy_sets.snorm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute “type” s-norm for input data x,y.
+the s-norm types:”max” - maximum: MAX(x,y),
+“prod” - algebraic sum: x + y - xy
+“eprod” - einstein sum: (x + y)/ (1 + xy)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> – input data 1</li>
+<li><strong>y</strong> – input data 2</li>
+<li><strong>norm_type</strong> – “max”, “prod” or “eprod” type snorm</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">S-Norm of x,y</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fuzzy_sets.tnorm">
+<code class="descclassname">fuzzy_sets.</code><code class="descname">tnorm</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>norm_type</em><span class="sig-paren">)</span><a class="headerlink" href="#fuzzy_sets.tnorm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return “type” tnorm of input x and y.
+Types of tnorm: “min”  : Minimum sum t-norm
+“prod” : Algebic product t-norm
+“eprod”: Einstein product tnorm</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> – value 1</li>
+<li><strong>y</strong> – value 2</li>
+<li><strong>norm_type</strong> – “min”, “prod”, eprod</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">“type” tnorm of (x,y)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 </div>
 
@@ -119,6 +740,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="project.html" title="Project Summary"
              >next</a> |</li>
