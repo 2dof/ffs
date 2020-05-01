@@ -340,7 +340,7 @@ def evaluate(fis,x):
                 idx = abs(fis.RuleList[rule, fis.Ninputs + outp])
                 if ((tmp2[rule]>0) & (idx > 0)):
                     pt1 = idx + out_mfcsum[outp] - 1
-                    param = fis.mfparo[pt1][:]
+                    param = fis.mfparo[pt1][1:]
                     gi = param[0]
                     for i in range(0, fis.Ninputs):
                         gi += param[i + 1] * x[i]

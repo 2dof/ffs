@@ -1,6 +1,6 @@
-
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python3
-# coding=utf-8
+ 
 # -----------------------------------------------------------------------
 # mfs.py
 # -----------------Copyrights and license ------------------------------------------------------
@@ -41,7 +41,6 @@ def trimf(xn,param):
     :rtype: float
     """
     return max(min((xn-param[0])/(param[1]-param[0]),(param[2]-xn)/(param[2]-param[1])),0)
-
 
 def trapmf(xn,param):
     """
@@ -99,9 +98,8 @@ def gaussmf(xn,param):
 def gauss2mf(xn,param):
     """
     Compute nonsymmetric gaussian function membership
+    return value  of nonsymmetric Gaussian function depends of param=[sigma_1, c1, sigma_2, c2]
     
-    return value  of nonsymmetric Gaussian function depends of param=[σ1, c1, σ2, c2]
-
     :param xn: input sample
     :param param: [sigma1, const.1,sigma 2, const.2]
     :type xn: float
@@ -132,7 +130,7 @@ def gbellmf(xn,param):
     """ 
         Generalized bell-shaped membership function
         retur value of Generalized bell-shaped function:
-        :math: `f(x,a,b,c) = gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)`.
+        :math: 'f(x,a,b,c) = gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)' 
         :param xn:      input value,
         :param param: [a,b,c],
         :type xn:         float,

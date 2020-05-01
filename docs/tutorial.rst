@@ -74,16 +74,19 @@ Rule are added as coded list of integers of length (N_inpust+ Noutputs +1]
  
 for example:
 Rule: If x1 is A1 AND x2 B2 then output is  C3  
-coded Rule : R=[1,  2, 3, 1]
-R[0]=1 means first  (A1) mf of input x1
-R[1]=2 means second (B2) mf of input x2
-R[2]=3 means third (C3) mf of  output 1
-R[3]=1 means AND operator,  for OR oerator will be 0 
+| coded Rule : R=[1,  2, 3, 1]
 
-examples: if x1 is A2, thed output is C1  -> [a, 0, 1, 1]  , zero means there is no x2 in rule 
-           if x2 is A1 OR x2 is B1 then output is C2  -> [1, 1, 2, 0]  
+| R[0]=1 means first  (A1) mf of input x1
+| R[1]=2 means second (B2) mf of input x2
+| R[2]=3 means third (C3) mf of  output 1
+| R[3]=1 means AND operator,  for OR oerator will be 0 
+
+examples: 
+| if x1 is A2, thed output is C1  -> [a, 0, 1, 1]  , zero means there is no x2 in rule 
+| if x2 is A1 OR x2 is B1 then output is C2  -> [1, 1, 2, 0]  
 
 Lets add Rules to our fuzzy system 
+
 .. code-block:: python
 
       R1=[1,1,1,1]            # Rule 1:  if x1 is A1 and x2 is B1 then y is C1   

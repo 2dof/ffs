@@ -238,18 +238,18 @@ class fism:
                     param =np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
                     self.mfparo[0:] = param
                 else:
-                    param = np.insert(parammf, -1, values=0, axis=0)
+                    #param = np.insert(parammf, -1, values=0, axis=0)
+                    param =np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
                     self.mfparo[0:]=param
-                    self.mfnames_out = np.insert(self.mfnames_out, idx, values=namemf, axis=0)
-
-                self.mfnames_out[0]=namemf
-
+    
+                #self.mfnames_out[0]=namemf
+                self.mfnames_out = np.insert(self.mfnames_out, idx, values=namemf, axis=0)        
             else:
                 if self.type == 'mamdani':
                     param =np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
                     self.mfparo = np.insert(self.mfparo, idx, values=param, axis=0)
                 else:
-                    param = np.insert(parammf, -1, values=0, axis=0)
+                    param =np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
                     self.mfparo = np.insert(self.mfparo, idx, values=param, axis=0)
 
                 self.mfnames_out=np.insert(self.mfnames_out, idx, values=namemf, axis=0)
@@ -371,8 +371,14 @@ class fism:
 
      
         else:
+            
+            out_mfcsum= [0] * (self.Noutputs+1)
+            for i in range(1,self.Noutputs+1):
+                out_mfcsum[i]=out_mfcsum[i-1]+self.Nout_mf[i-1]
+            #print(in_mfcsum)
+            idx=out_mfcsum[var_index-1]
             for i in range(0,Nmf):
-                mf_list[i]=[self.mfnames_out[i],mftypes[int(self.mfparo[i][0])],self.mfpari[i][0:-1]]
+                mf_list[i]=[self.mfnames_out[idx+i],mftypes[int(self.mfparo[idx+i][0])],self.mfparo[idx+i][0:-1]]
 
         return mf_list
 
