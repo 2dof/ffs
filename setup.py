@@ -11,7 +11,7 @@ with open(os.path.join(os.path.dirname(__file__), 'ffs/__init__.py')) as f:
                   f.read(), re.M).group(1)
 setup(name='ffs',
       version=version,
-      description='simple fuzzy functional system (ffs)',
+      description='Simple fuzzy functional system (ffs)',
       url='',
       author='Lukasz Szydlowski',
       author_email='',
