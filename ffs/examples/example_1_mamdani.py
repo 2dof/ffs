@@ -124,7 +124,7 @@ fig = plt.figure(4)
 # set up the axes for the first plot
 ax =  fig.gca(projection='3d')
 ax.plot_surface(X, Y, Z, cmap=cm.jet, rstride=1, cstride=1)
-#fig.colorbar(surf, shrink=0.5, aspect=10)
+ax.plot_wireframe(X, Y, Z, rstride=1, cstride=1)
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
