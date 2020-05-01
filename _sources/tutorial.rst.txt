@@ -1,15 +1,35 @@
 Tutorial
 ========
 
+This simple tutorial shows how to create and configure 2-input, 1-output Fuzzy System:
+| Mamdani System - in Example 1 
+| TSK (Takagi-Sugeno-Kang) in Example 2       
+ 
 .. contents:: Table of Contents
 .. section-numbering::
-
-
 
 
 --------------------------------
 Exmaple1: Mamdani Fuzzy System 
 --------------------------------
+
+**Overview**
+In this example we create default Mamdani system, configure FIS with triangular input and output membership functions 
+and add some rule to explore properties of out Fuzzy system.
+
+Code for this example You will fing in package code in: ffs/examples/example_1_mamdani.py (https://github.com/2dof/ffs/tree/master/ffs)
+
+**Imort lib**
+
+.. code-block:: python
+
+    from fuzzy import *
+    from fuzzy_sets import * 
+
+
+
+
+**Cerating Mamdan i Fuzzy System**
 
 Lets create mamdaani fuzzy system with 2 inputs and 1 output and default settings:
 OR methog: 'max' , AND method: 'min'
@@ -17,9 +37,11 @@ Implication method:  'min'  (minimum)
 Aggregation Method:  'max'  (maxsimum)   
 Defuzzyfication Method: 'centroid' (center of gravity)
 
-Imputs and outputs name and ranges:  input 1 named 'x1' and varianle range from 0 to 2.0
-                                     input 2 named 'x3' and varianle range from 0 to 2.0 
-                                     output  named 'y1' and varianle range from 0 to 2.0
+Imputs and outputs name and ranges:  
+| input 1 named 'x1' and varianle range from 0 to 2.0
+| input 2 named 'x2' and varianle range from 0 to 2.0 
+| output  named 'y1' and varianle range from 0 to 2.0
+
 .. code-block:: python
 
       fis1=fism('mamdani')
@@ -81,8 +103,9 @@ Rule: If x1 is A1 AND x2 B2 then output is  C3
 | R[2]=3 means third (C3) mf of  output 1
 | R[3]=1 means AND operator,  for OR oerator will be 0 
 
-examples: 
-| if x1 is A2, thed output is C1  -> [a, 0, 1, 1]  , zero means there is no x2 in rule 
+For example: 
+
+| if x1 is A2, then output is C1  -> [1, 0, 1, 1]  , zero means there is no x2 in rule 
 | if x2 is A1 OR x2 is B1 then output is C2  -> [1, 1, 2, 0]  
 
 Lets add Rules to our fuzzy system 
@@ -98,7 +121,6 @@ Lets add Rules to our fuzzy system
       fis1.addrule(R3,1.0)
 
 
-
 **Evaluate fuzzy system**
 
 .. code-block:: python
@@ -107,6 +129,41 @@ Lets add Rules to our fuzzy system
       x2 = 0.5
       y1 = evaluate(fis1,[x1, x2])
       print(f'fuzzy input:[{x1}, {x2}] output = {y1}')
+    
+   
+**Plot Fuzzy Surface** 
+ 
+
+.. code-block:: python
+
+      # import plot library 
+      from mpl_toolkits.mplot3d.axes3d import Axes3D 
+      from matplotlib import cm
+
+
+ .. code-block:: python
+ 
+      # generatge surface data points 
+      X,Y,Z=getsurf(fis1,25)           
+      X, Y = np.meshgrid(X, Y)         # do mesh grid from X,Y input data points
+    
+    
+      # plot sufrave
+      fig = plt.figure(4)
+      ax =  fig.gca(projection='3d')
+      ax.plot_surface(X, Y, Z, cmap=cm.jet, rstride=1, cstride=1)
+      ax.plot_wireframe(X, Y, Z, rstride=1, cstride=1)
+      ax.set_xlabel('X')
+      ax.set_ylabel('Y')
+      ax.set_zlabel('Z')
+      plt.title('fuzzy surface')
+
+.. figure:: images/mamdani_surf_a_1.png
+   :width: 500
+   :align: center
+   :alt:  mfs plot  
+
+      
 
 -------------------------------------------
 Exmaple2: TSK Fuzzy System (in preparation) 
