@@ -129,7 +129,7 @@ class TestFUZZY(unittest.TestCase):
         fis1.addmf('in', 1, 'A2', 'trimf', [0, 1, 2, 0])
         fis1.addmf('in', 1, 'A3', 'trimf', [1, 2, 3, 0])
  
-        
+   
         fis1.addmf('in', 2, 'B1', 'trimf', [-1, 0, 1, 0])
         fis1.addmf('in', 2, 'B2', 'trimf', [0, 1, 2, 0])
         fis1.addmf('in', 2, 'B3', 'trimf', [1, 2, 3, 0])

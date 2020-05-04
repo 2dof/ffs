@@ -142,7 +142,7 @@ fis1.addrule([1, 3, 2, 1],1.0)       # Rule 5
 
 # ====================changing deffuzyfication methon ========================== 
 #fis1.Defuzzymethod = 'mom'     # or 'mom', 'som', 'lom', 'bisector'
-fis1.ANDmethod = 'eprod'              # AND method Tnorms: ,'min' ,'prod' , eprod'
+#fis1.ANDmethod = 'eprod'              # AND method Tnorms: ,'min' ,'prod' , eprod'
 
 
 X,Y,Z=getsurf(fis1,25)

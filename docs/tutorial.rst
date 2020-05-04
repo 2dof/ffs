@@ -272,22 +272,34 @@ For more detail about attributes of fuzzy of fuzzy system read API documentation
 Exmaple 2: TSK Fuzzy System (in preparation) 
 --------------------------------------------
 
+Code for this example You will find in package code in: ffs/examples/example_1_tsk.py (https://github.com/2dof/ffs/tree/master/ffs)
+
 **Overview**
-In this example TSK Fuzzy Model with singleton (constant) output membership functions.
+In this example TSK Fuzzy Model with singleton (constant) output membership functions will be tested.
+
+Lets create 2 input ('x1', 'x2') and 1 output (y2) Sugeno fuzzy model with prarameters:
+
+| input x1, range:[-5,5], mf A1: gaussian: :math:`c1 =-5`, :math:`\sigma_{1}=3`, mf A2: gaussian: :math:`c2 =5`, :math:`\sigma_{2}=3`
+| input x2, range:[-5,5], mf B1: gaussian: :math:`c1 =-5`, :math:`\sigma_{1}=3`, mf B2: gaussian: :math:`c2 =5`, :math:`\sigma_{2}=3`
+| output y2, range:[-10,10],  singletone mf: C1=-10.0, C2=0.0 , C3= 10.0 
+
 
 
 **Imort library**
 
+Command sys.path.append("..") include upped folder (with fuzzy lib) to the path, we run example
+from subfolder examples in main library directory.
+
 .. code-block:: python
 
-    import sys                             
-    sys.path.append("..")
+    import sys                           
+    sys.path.append("..")          
     from fuzzy import *
     from fuzzy_sets import * 
     from plot_fis import plot_mfs  
     
     
-**Cerating TSK Fuzzy system**
+**Design TSK Fuzzy system**
 
 .. code-block:: python
 
@@ -298,7 +310,7 @@ In this example TSK Fuzzy Model with singleton (constant) output membership func
     fis2.addvar('in','x2',[-5.,5.])
     fis2.addvar('out','y1',[-10.,10.0])
     # input 1
-    fis2.addmf('in',1,'A1','gaussmf',[3,-5,0,0])   # [sigma value, expected value]
+    fis2.addmf('in',1,'A1','gaussmf',[3,-5,0,0])   # [sigma , center of gaussian function]
     fis2.addmf('in',1,'A2','gaussmf',[3,5,0,0])
     # input 2
     fis2.addmf('in',2,'B1','gaussmf',[3,-5,0,0])
@@ -309,7 +321,7 @@ In this example TSK Fuzzy Model with singleton (constant) output membership func
     fis2.addmf('out',1,'C2','singleton',[0,0,0,0])
     fis2.addmf('out',1,'C3','singleton',[10,0,0,0])
 
-To plot MFS just call  plot_mfs(...) : 
+To plot MFS just call  plot_mfs(...): 
 
 .. code-block:: python
 
@@ -326,6 +338,8 @@ To plot MFS just call  plot_mfs(...) :
 
 **Add Rules**
 
+After defining inputs and membership function we can add 4 Rules:
+
 .. code-block:: python
 
     R1=[1, 1, 1, 1]         # If x1 is A1 and x2 is B1 then y is C1
@@ -338,9 +352,50 @@ To plot MFS just call  plot_mfs(...) :
     fis2.addrule(R3,1.)
     fis2.addrule(R4,1.)
 
+ 
+Now lets plot fuzzy surface:
+
+.. code-block:: python
+    
+    X,Y,Z=getsurf(fis2,25)
+    X, Y = np.meshgrid(X, Y)
+
+    #  plot surface
+    fig = plt.figure(2)
+    ax =  fig.gca(projection='3d')
+    ax.plot_surface(X, Y, Z, cmap=cm.jet, rstride=1, cstride=1,alpha=1,shade=False)
+    ax.plot_wireframe(X, Y, Z, rstride=1, cstride=1 )
+    plt.show()
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    plt.title('fuzzy tsk surface')
 
 
 .. figure:: images/tsk_surf_a_1.png
    :width: 400
    :align: center
    :alt:  mfs plot  
+   
+**Changing memnership parameters**
+
+Let change of gauusian :math:`\sigma` parameters for all inputs mfs. 
+calling method fis2.setmf(...), and plot mmfs and surface.
+
+.. code-block:: python
+
+    fis2.setmf('in',1,1,'gaussmf',[2,-5,0,0])   # in 1 , mf 1 
+    fis2.setmf('in',1,2,'gaussmf',[2,5,0,0])    # in 1 , mf 2  
+    fis2.setmf('in',2,1,'gaussmf',[2,-5,0,0])   # in 2 , mf 1
+    fis2.setmf('in',2,2,'gaussmf',[2,5,0,0])    # in 2 , mf 2
+    
+    #...plot mfs ans surface....
+    ...
+    
++--------------------------------------------+----------------------------------------------+ 
+| .. figure:: images/mf_plot_tsk2.png        | .. figure:: images/tsk_surf_a_2.png          |
+|   :width: 500                              |   :width: 500                                |
+|   :align: left                             |   :align: right                              |  
+|                                            |                                              |
++--------------------------------------------+----------------------------------------------+    
+

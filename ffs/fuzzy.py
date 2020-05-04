@@ -109,7 +109,7 @@ class fism:
                 self.addvar('out', 'out' + str(i + 1), [0, 100])
 
         self.mfnames_in = ['A1']
-        self.mfnames_out = ['y1']
+        self.mfnames_out = ['C1']
 
         self.mfpari = np.zeros((1, 5))  # [type,param1,param2,param3,param3
 
@@ -237,13 +237,13 @@ class fism:
                 if self.type=='mamdani':
                     param =np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
                     self.mfparo[0:] = param
+                    self.mfnames_out[0]=namemf
                 else:
                     #param = np.insert(parammf, -1, values=0, axis=0)
                     param =np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
                     self.mfparo[0:]=param
-    
-                #self.mfnames_out[0]=namemf
-                self.mfnames_out = np.insert(self.mfnames_out, idx, values=namemf, axis=0)        
+                    self.mfnames_out[0]=namemf# self.mfnames_out = np.insert(self.mfnames_out, idx, values=namemf, axis=0)        
+
             else:
                 if self.type == 'mamdani':
                     param =np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
@@ -331,7 +331,7 @@ class fism:
 
             idx = in_mfcsum[var_index - 1] + mf_index - 1
             param = np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
-            self.mfpari[idx:]=param
+            self.mfpari[idx][:]=param
 
 
         elif var_type =="out":  
@@ -342,7 +342,7 @@ class fism:
 
             idx = out_mfcsum[var_index - 1] + mf_index - 1
             param = np.insert(parammf, 0, values=mftypes.index(typemf), axis=0)
-            self.mfparo[idx:] = param
+            self.mfparo[idx][:] = param
         
         #print('edit mf ')
 
