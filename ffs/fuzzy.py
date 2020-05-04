@@ -4,7 +4,7 @@
 # -----------------Copyrights and license ------------------------------------------------------
 
 # This file is part of ffs (fuzzy functional system)
-# Copyright (C) @2018@ Szydlowski Lukasz
+# Copyright (C) @2020@ Szydlowski Lukasz
 # mailto:szydlowski.lu@gmial.com
 #
 #This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -16,11 +16,11 @@
 # If not, see http://www.gnu.org/licenses/
 # ----------------------------------------------------------------------------------------------
 __author__ = "Szydlowski Lukasz"
-__copyright__ = "Copyright 2018, szydlowski lukasz"
+__copyright__ = "Copyright 2020, szydlowski lukasz"
 __license__ = "GPL"
-__email__ = "szydlowski.lu@gmial.com"
+__email__ = "szydlowski.lu@gmail.com"
 __status__ = "Development"
-__version__ = "1.0.0.dev1"
+__version__ = "1.0.1"
 
 
 import numpy as np

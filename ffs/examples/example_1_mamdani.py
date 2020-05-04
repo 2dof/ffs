@@ -14,9 +14,8 @@ import numpy as np
 from fuzzy  import *
 from fuzzy_sets import * 
 
-
-import matplotlib.pylab as plt
-#import matplotlib.pyplot as plt
+from matplotlib.pylab import *
+import matplotlib.pyplot as plt
 plt.rcParams['lines.linewidth'] = 0.5
 plt.rcParams['lines.markersize'] = 2
 plt.rcParams["savefig.facecolor"]='white'
@@ -60,7 +59,7 @@ fis1.addmf('out',1,'C3','trimf',[1,2,3,0])
 # first lets import dedicated plot functuon from plot_fis class and then
 from plot_fis import plot_mfs  
 
-figure(1)
+plt.figure(1)
 subplot(221);  cla(); plot_mfs(fis1,'in',1)  
 subplot(222);  cla(); plot_mfs(fis1,'in',2)      
 subplot(212);  cla();plot_mfs(fis1,'out',1)  
@@ -97,15 +96,16 @@ y1 = evaluate(fis1,[x1, x2])
 print(f'fuzzy input:[{x1}, {x2}] output = {y1}')
 
 # compute out of range 
-y1 = evaluate(fis1,[-1, -1])
-print (y1)
-print('fis1.outOfRange :',fis1.outOfRange)
+y1 = evaluate(fis1,[-0.5, -0.5])
+print ('test for inputs out of range: evaluate(fis1,[-0.5, -0.5]) =', y1)
+print('fis1.outOfRange =',fis1.outOfRange)
 
 # compute when no Rule is fired
-# for example when   x1=0, x2=2 so A1 and B3 is activated, there is no rule for this condition
+# for example when   x1=0,5, x2=2 so A1 and B3 is activated, there is no rule for this condition
 y1 = evaluate(fis1,[0, 2])          
-print (y1)
-print('fis1.outOfRange :',fis1.outOfRange)
+print ('test for no rule activated: evaluate(fis1,[0.5, 2]) =', y1)
+print('fis1.NoRuleFired =',fis1.NoRuleFired)
+ 
 
 
 # ======================= plot surface ======================================
@@ -121,7 +121,6 @@ X, Y = np.meshgrid(X, Y)
 
 # set up a figure twice as wide as it is tall
 fig = plt.figure(4)
-# set up the axes for the first plot
 ax =  fig.gca(projection='3d')
 ax.plot_surface(X, Y, Z, cmap=cm.jet, rstride=1, cstride=1)
 ax.plot_wireframe(X, Y, Z, rstride=1, cstride=1)
@@ -131,6 +130,36 @@ ax.set_zlabel('Z')
 plt.title('fuzzy surface')
 
 
+#========================Add rest of Rules=====================================
+
+fis1.addrule([3, 1, 2, 1],1.0)       # Rule 4
+fis1.addrule([1, 3, 2, 1],1.0)       # Rule 5 
+#fis1.addrule([2, 1, 1, 1],1.0)       # Rule 6 
+#fis1.addrule([1, 2, 1, 1],1.0)       # Rule 7  
+#fis1.addrule([2, 3, 3, 1],1.0)       # Rule 8
+#fis1.addrule([3, 2, 3, 1],1.0)       # Rule 9
 
 
+# ====================changing deffuzyfication methon ========================== 
+#fis1.Defuzzymethod = 'mom'     # or 'mom', 'som', 'lom', 'bisector'
+fis1.ANDmethod = 'eprod'              # AND method Tnorms: ,'min' ,'prod' , eprod'
+
+
+X,Y,Z=getsurf(fis1,25)
+X, Y = np.meshgrid(X, Y)
+
+# set up a figure twice as wide as it is tall
+fig = plt.figure(5); plt.cla()
+ax =  fig.gca(projection='3d')
+ax.plot_surface(X, Y, Z, cmap=cm.jet, rstride=1, cstride=1)
+ax.plot_wireframe(X, Y, Z, rstride=1, cstride=1)
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+plt.title('fuzzy surface ')
+
+ 
+#=======================================================================
+ 
+plt.title('fuzzy surface ')
  
