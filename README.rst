@@ -13,21 +13,22 @@ Project Summary
 ===============
 
 Actual status
-----------------
-:Version: 1.0.0 dev1
+-------------
+:Version: 1.0.1
 :Status:    developing
 
 Done:
 +++++
-* Implemented basic fuzzy inference engine and fuzzy class structure for only 'AND' or 'OR' logic in user-defined rules
-* TSK for linear inference 
+* added tutorial for Mamdani and TSK inference
+* added flags: **outOfRange** and **NoRuleFired**
+
+ 
 
 To Do:
 ++++++
-* Docs, Examples
+ 
 * Add siplified Fuzzy models ( Rule Table Arrays, Lookup Tables) for Fuzzy Control modeling and simulation 
 * Add self organizing, adataptaion mechanisms 
 * Implementet supprot for 'AND' and 'OR' logic user defined rules, and linguistic Rules definition
 * GUI for building fuzzy inference systems and viewing and analyzing result
 * Code optimization and refractoring (port to Cython)
-* support for normalized parameters and values (integer based computation)
