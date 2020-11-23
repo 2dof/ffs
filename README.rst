@@ -30,5 +30,5 @@ To Do:
 * Add siplified Fuzzy models ( Rule Table Arrays, Lookup Tables) for Fuzzy Control modeling and simulation 
 * Add self organizing, adataptaion mechanisms 
 * Implementet supprot for 'AND' and 'OR' logic user defined rules, and linguistic Rules definition
-* GUI for building fuzzy inference systems and viewing and analyzing result
-* Code optimization and refractoring (port to Cython)
+* GUI for fuzzy inference systems and viewing and analyzing result
+* Code optimization and refractoring (port to C/C++)

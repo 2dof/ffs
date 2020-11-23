@@ -38,7 +38,7 @@ class fism:
     **Aggregation method:**  'max'\n
     **Deffuzyfication method:** 'centroid'\n
 
-    .. note:: fism in ver.1.0.0 is only fuzzy structure container. Fuzzy Inference Process is implemented by evaluate(fis,x) from fuzzy_sets.py.
+    .. note:: fism in ver.1.0.1 is only fuzzy structure container. Fuzzy Inference Process is implemented by evaluate(fis,x) from fuzzy_sets.py.
 
     =================   ==============   ========================================================
     Atributes           format           Description
@@ -133,7 +133,7 @@ class fism:
         :param name: name of variable
         :type name: string
         :param range: [min,max] range value of variable
-        :type tange: [double,double]
+        :type range: [double,double]
 
         **Example**
 

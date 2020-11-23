@@ -75,6 +75,7 @@ def gaussmf(xn,param):
     """
     Compute gaussian function membership
     return value  of symmetric Gaussian function
+    
     :math:`gaussmf(x,[\sigma,c])= e^{\\frac{-(x-c)^2}{2\sigma^2}}`
 
     :param xn:  input sample
@@ -100,7 +101,7 @@ def gauss2mf(xn,param):
     return value  of nonsymmetric Gaussian function depends of param=[sigma_1, c1, sigma_2, c2]
     
     :param xn: input sample
-    :param param: [sigma1, const.1,sigma 2, const.2]
+    :param param: [sigma1, const1, sigma2, const2]
     :type xn: float
     :type param: float
     :return: value of nonsymmetric Gaussian function
@@ -129,7 +130,9 @@ def gbellmf(xn,param):
     """ 
         Generalized bell-shaped membership function
         retur value of Generalized bell-shaped function:
-        :math: 'f(x,a,b,c) = gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)' 
+            
+        :math:`f(x,a,b,c) = gbellmf[x,[a,b,c]] = 1/(1+(abs((x−c)/a))^2b)`
+         
         :param xn:      input value,
         :param param: [a,b,c],
         :type xn:         float,

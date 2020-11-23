@@ -10,7 +10,7 @@ This simple tutorial shows how to create and configure 2-input, 1-output Fuzzy S
 
 
 --------------------------------
-Exmaple1: Mamdani Fuzzy System 
+Examaple 1: Mamdani Fuzzy System 
 --------------------------------
 
 **Overview**
@@ -268,9 +268,9 @@ Surfaces for changes FIS parameters:
 For more detail about attributes of fuzzy of fuzzy system read API documentation for **fism class**. 
    
 
---------------------------------------------
-Exmaple 2: TSK Fuzzy System (in preparation) 
---------------------------------------------
+----------------------------
+Examaple 2: TSK Fuzzy System 
+----------------------------
 
 Code for this example You will find in package code in: ffs/examples/example_1_tsk.py (https://github.com/2dof/ffs/tree/master/ffs)
 

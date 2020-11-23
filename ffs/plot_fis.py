@@ -53,7 +53,6 @@ def plot_mfs(fis,var_type,No):
             Y=np.array([0,1])
             xs=xo
         else:
-            print('------------')
             Npts=101
             dx1 = np.abs(fis.varRange[No-1][1]-fis.varRange[No-1][0])/float(Npts)
             X= np.array(range(0, Npts + 1)) * dx1+fis.varRange[No-1][0]

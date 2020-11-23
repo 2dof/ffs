@@ -1,6 +1,6 @@
 API Documentation
 =================
-:Version: 1.0.0
+:Version: 1.0.1
 :Status:    developing version
 
 .. automodule:: fuzzy
@@ -21,4 +21,11 @@ Memebership Functions
 Fuzzy sets
 ----------
 .. automodule:: fuzzy_sets
+    :members:    
+    
+==============
+    
+fast fuzzy 
+----------
+.. automodule:: fastffs
     :members:    
